@@ -1,0 +1,38 @@
+
+
+.flex-cols {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
+}
+.flex-cols > * {
+    flex-shrink: 1;
+    flex-basis: auto;
+    width: 100%;
+    overflow: hidden;
+    /*overflow-x: hidden;*/
+}
+
+.flex-rows {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+}
+.flex-rows > * {
+    flex-shrink: 1;
+    flex-basis: auto;
+    min-height: 10px;
+    overflow: hidden;
+    /*overflow-y: hidden;*/
+}
+
+.flex-auto { width: auto; flex-basis: initial; }
+.flex-this-1 { flex-grow: 1; }
+.flex-this-2 { flex-grow: 2; }
+.flex-this-3 { flex-grow: 3; }
+
+.flex-cols > .flex-this-1 { flex-basis: 0; }
+.flex-cols > .flex-this-2 { flex-basis: 0; }
+.flex-cols > .flex-this-3 { flex-basis: 0; }

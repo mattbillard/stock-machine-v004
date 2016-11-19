@@ -1,0 +1,157 @@
+
+-------------------- stock-machine-v003: Python/Flask --------------------
+
+2016-04-23
+- New Github repo
+    - Make
+    - Clone
+    - Add Abbey as contributor to repo
+- Python
+    - Check python version
+    - Update if necessary
+    - Create virtualenv
+    - pip install flask
+    - export virtualenv to requirements.txt
+- New Intellij project
+    - Use Python plugin
+    - Point to virtualenv python
+    - Ensure debug works
+- App skeleton
+    - Flask
+        - static/
+        - send index.html
+    - npm
+        - bower
+    - bower
+        - put bower in static
+        - add dependencies
+- Clean up v002
+    - Replace sugar.js with lodash
+    - Rename JS and CSS files to use dashes
+    - Rename CSS IDs and classes to use dashes
+    - Separate filters into multiple files
+    - Misc clean up
+- Recreate v002 of app
+    - Angular SPA
+        - Angular routes and views
+    - Use api endpoints that return static JSON
+        - analysis
+            - get-stock-from-db
+            - redo-calcs
+        - table
+            - search-data-table
+        - automate
+            - automate-next-stock
+
+2016-04-24
+- Flask
+    - Organize app into modules according to best practices
+
+2016-05-05
+- Fix SQLite install
+
+2016-05-07
+- Use SQLite DB from StockMachine v002
+    - Database
+        - Connect app to DB
+        - Init and fill DB if not present
+    - Data XHR calls
+        - Get stock
+        - Search dataTable
+
+2016-06-04
+- Clean up
+    - Update URLs to follow REST standards
+        - /api/stocks
+        - /api/stocks/<symbol>
+- Fix
+    - Automate feature
+    - Reorder stocks
+
+2016-07-12
+- Misc
+    - Move code from AnalysisCtrl to a StocksServ
+    - Recent stock list not working for mobile screen width
+    - Capitalize ctrls and servs
+    - Delete unneeded comments
+
+2016-07-16
+- Quandl
+    - Assess Quandl and compare data provided with what we need
+    - Not an option. Hard to find the numbers we need. None of the useful databases are free.
+    - It would be better to try scraping msn
+
+2016-09-17
+- Upgrade to Angular 1.5
+    - Clean up directives
+
+2016-09-24
+- Upgrade to Angular 1.5
+    - Replace controllers with components
+    - Update Angular UI Router, Angular UI Sortable, Angular UI Bootstrap
+
+2016-10-08
+- Clean up
+    - Move files in webapp/ up one directory
+    - Update package.json, readme.md
+- Upgrade to Angular 1.5
+    - Remove incompatible features
+        - replace:true
+        - ng-include
+    - Convert directives to components
+    - Manual bootstrapping
+    - Switch to TypeScript
+- Gulp
+    - Improved gulp scripts: dev and prod
+    - Reorganize to create clear server/, public/dev/, and public/prod/ dirs
+
+2016-10-13
+- dev vs prod
+    - Run python as dev vs prod
+    - Switch static dir
+
+2016-11-05
+- Gulp
+    - TypeScript
+    - Watch
+    - Clean up
+
+2016-11-11
+- TypeScript
+    - Try using npm run tst to compiling ts to js
+- Gulp
+    - Redo and simplify gulp file
+    - Dev now does all compiling (less, ts)
+    - Prod now does all concat+min (css, js)
+
+2016-11-15
+- TypeScript
+    - Convert to classes
+    - Swap var -> let
+
+-------------------- stock-machine-v004: MEAN --------------------
+
+2016-11-19
+- Create new git repo / project
+- Copy old files
+    - public files
+    - server/views
+    - .gitignore, bower, gulp, npm, tsconfig, readme
+
+
+
+TODO@mattbillard
+
+- MEAN stack
+    - Fill DB if empty
+    - bin/run_dev and run_prod
+    - Controllers
+    - Models
+- Angular 2
+- Later
+    - Redo calcs
+    - Login
+    - Switch back to getting fresh data rather than pulling stock from DB
+- Redo design
+
+

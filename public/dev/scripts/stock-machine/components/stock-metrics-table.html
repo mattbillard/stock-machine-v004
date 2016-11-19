@@ -1,0 +1,84 @@
+
+<table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>ROIC</th>
+                <th>BVPS</th>
+                <th>&nbsp;</th>
+                <th>Sales</th>
+                <th>&nbsp;</th>
+                <th>EPS</th>
+                <th>&nbsp;</th>
+                <th>Cash Flow</th>
+                <th>&nbsp;</th>
+                <th>Debt</th>
+                <th>PE</th>
+                <th>Net Income</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="yearObj in $ctrl.tableData">
+                <td class="bold">{{yearObj.year}}</td>
+                <td ng-class="yearObj.roic.num | redGreenNum">{{yearObj.roic.num | sitePercent}}</td>
+
+                <td class="gray-text">{{yearObj.bvps.num | siteNum}}</td>
+                <td ng-class="yearObj.bvps.growth | redGreenNum">{{yearObj.bvps.growth | sitePercent}}</td>
+
+                <td class="gray-text">{{yearObj.sales.num | siteNum}}</td>
+                <td ng-class="yearObj.sales.growth | redGreenNum">{{yearObj.sales.growth | sitePercent}}</td>
+
+                <td class="gray-text">{{yearObj.eps.num | siteNum}}</td>
+                <td ng-class="yearObj.eps.growth | redGreenNum">{{yearObj.eps.growth | sitePercent}}</td>
+
+                <td class="gray-text">{{yearObj.cashFlow.num | siteNum}}</td>
+                <td ng-class="yearObj.cashFlow.growth | redGreenNum">{{yearObj.cashFlow.growth | sitePercent}}</td>
+
+                <td class="gray-text">{{yearObj.debt.num | siteNum}}</td>
+                <td class="gray-text">{{yearObj.pe.num | siteNum}}</td>
+                <td class="gray-text">{{yearObj.netIncome.num | siteNum}}</td>
+            </tr>
+            <tr>
+                <td class="bold" style="min-width:100px;">Avg of <br>Up To 5 Latest<br>Growth Rates:</td>
+                <td ng-class="$ctrl.averages.roic | redGreenNum">{{$ctrl.averages.roic | sitePercent}}</td>
+                <td>&nbsp;</td>
+                <td ng-class="$ctrl.averages.bvps | redGreenNum">{{$ctrl.averages.bvps | sitePercent}}</td>
+                <td>&nbsp;</td>
+                <td ng-class="$ctrl.averages.sales | redGreenNum">{{$ctrl.averages.sales | sitePercent}}</td>
+                <td>&nbsp;</td>
+                <td ng-class="$ctrl.averages.eps | redGreenNum">{{$ctrl.averages.eps | sitePercent}}</td>
+                <td>&nbsp;</td>
+                <td ng-class="$ctrl.averages.cashFlow | redGreenNum">{{$ctrl.averages.cashFlow | sitePercent}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr ng-if="$ctrl.StocksServ.currStock">
+                <td>&nbsp;</td>
+                <td>
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.roic.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="2">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.bvps.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="2">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.sales.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="2">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.eps.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="2">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.cashFlow.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="1">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.debt.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="1">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.pe.numbers.arr"></simple-chart>
+                </td>
+                <td colspan="1">
+                    <simple-chart data="$ctrl.StocksServ.currStock.nums.netIncome.numbers.arr"></simple-chart>
+                </td>
+            </tr>
+        </tbody>
+    </table>

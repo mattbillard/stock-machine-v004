@@ -1,0 +1,32 @@
+
+@media print {
+  /* remove the link text Chrome adds when printing */
+  a:after {
+    content: "" !important;
+  }
+
+  body {
+    zoom: 0.70 !important;
+  }
+
+  #main-content {
+    margin-left: 0;
+  }
+
+  #recent-stock-list {
+    display: none;
+  }
+
+  #input-area {
+    display: none;
+  }
+
+  stock-metrics-table {
+    th, td {
+      padding: 0px !important;
+    }
+    .graph {
+      zoom: 0.65;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+
+<div class="control-group">
+    <div class="form-group row">
+        <label class="control-label col-md-4" for="{{$ctrl.key}}">{{$ctrl.label}}</label>
+        <div class="col-md-2" ng-if="!$ctrl.readonly">
+            <input type="text" class="form-control" id="{{$ctrl.key}}" ng-model="$ctrl.StocksServ.currStock.calcs[$ctrl.key]" ng-blur="$ctrl.redoCalcs(key, $event)"/>
+        </div>
+        <div class="col-md-2" ng-if="$ctrl.readonly">
+            <input type="text" class="form-control" id="{{$ctrl.key}}" ng-model="$ctrl.StocksServ.currStock.calcs[$ctrl.key]" readonly/>
+        </div>
+        <div class="col-md6" style="padding:7px 15px 0 15px" ng-transclude></div>
+    </div>
+</div>

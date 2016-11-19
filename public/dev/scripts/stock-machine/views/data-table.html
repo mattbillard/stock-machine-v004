@@ -1,0 +1,75 @@
+
+<div>
+    <h1>DataTable</h1>
+
+    <table st-table="$ctrl.data" class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th st-sort="symbol">Symbol</th>
+                <th st-sort="name">Name</th>
+                <th st-sort="nums.currentStockPrice">Current Price</th>
+                <th st-sort="calcs.percentageDiscount">Percentage Discount</th>
+                <th st-sort="nums.roic.numbers.average">ROIC</th>
+                <th st-sort="nums.bvps.growths.average">BVPS</th>
+                <th st-sort="nums.sales.growths.average">Sales</th>
+                <th st-sort="nums.eps.growths.average">EPS</th>
+                <th st-sort="nums.cashFlow.growths.average">Cash Flow</th>
+                <th st-sort="stockMarket">Stock Market</th>
+            </tr>
+            <tr>
+                <th>
+                    <input ng-model="$ctrl.search.symbol" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                    <th>
+                        <input ng-model="$ctrl.search.name" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    </th>
+                <th>
+                    <input ng-model="$ctrl.search.currentStockPrice" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.percentageDiscount" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.averageRoics" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.averageBvpsGrowth" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.averageSalesGrowth" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.averageEpsGrowth" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.averageCashFlowGrowth" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input ng-model="$ctrl.search.stockMarket" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody ng-if="$ctrl.state==='loaded'">
+            <tr ng-repeat="stockObj in $ctrl.data">
+                <td>{{stockObj.symbol}}</td>
+                <td>{{stockObj.name}}</td>
+                <td>{{stockObj.nums.currentStockPrice}}</td>
+                <td>{{stockObj.calcs.percentageDiscount}}</td>
+                <td>{{stockObj.nums.roic.numbers.average}}</td>
+                <td>{{stockObj.nums.bvps.growths.average}}</td>
+                <td>{{stockObj.nums.sales.growths.average}}</td>
+                <td>{{stockObj.nums.eps.growths.average}}</td>
+                <td>{{stockObj.nums.cashFlow.growths.average}}</td>
+                <td>{{stockObj.stockMarket}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Loading -->
+    <div ng-if="$ctrl.state==='loading'" class="text-center" style="padding: 100px;">
+        <i class="fa fa-refresh fa-spin fa-lg"></i>
+    </div>
+
+<!--    <pre>{{dataTable | json}}</pre>-->
+
+</div>

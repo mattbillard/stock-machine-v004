@@ -1,0 +1,26 @@
+
+<div>
+    <h1>Automation</h1>
+    <div class="well">
+        <div class="flex-cols">
+            <div class="flex-auto">
+                <a ng-if="!$ctrl.isAutomating()" href="" class="btn btn-success" ng-click="$ctrl.automationStart();">Start</a>
+                <a ng-if="$ctrl.isAutomating()" href="" class="btn btn-danger" ng-click="$ctrl.automationStop();">Stop</a>
+            </div>
+            <div ng-if="$ctrl.isAutomating()" class="flex-this-1" style="font-size: 24px; padding-top: 4px;">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="bold">{{$ctrl.getAutomationCount() || 0}} / {{$ctrl.NUM_STOCKS_TO_AUTOMATE}}</div>
+        <div class="progress flex-this-1">
+            <uib-progressbar value="$ctrl.getAutomationPercent()">{{$ctrl.getAutomationPercent()}}%</uib-progressbar>
+        </div>
+
+        <small>
+            NOTE: Check the browser's console for more details
+        </small>
+    </div>
+</div>

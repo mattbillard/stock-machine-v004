@@ -1,0 +1,31 @@
+{
+  "name": "stock-machine-v004",
+  "description": "Stock Machine hobby project built with the MEAN stack",
+  "main": "",
+  "authors": [
+    "mattbillard"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mattbillard/stock-machine-v004",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/dev/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-bootstrap": "^2.2.0",
+    "angular-smart-table": "^2.1.8",
+    "angular-ui-router": "^0.3.2",
+    "angular-ui-sortable": "^0.15.0",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "highcharts": "^5.0.3",
+    "lodash": "^4.17.2",
+    "less": "^2.7.1"
+  }
+}

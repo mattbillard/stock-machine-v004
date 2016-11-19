@@ -1,0 +1,8 @@
+
+<strong>Recent Stocks:</strong>
+<ul ui-sortable="{ axis:y }" ng-model="$ctrl.StocksServ.stockList">
+    <li ng-repeat="stockObj in $ctrl.StocksServ.stockList track by $index" ng-class="$ctrl.StocksServ.percentageDiscountCssClass(stockObj)">
+        <a href="" ng-click="$ctrl.StocksServ.deleteStock($index);"><i class="fa fa-times"></i></a>&nbsp;
+        <a href="" ng-click="$ctrl.StocksServ.loadFromStockList($index); $ctrl.modalOk();">{{stockObj.symbol}}</a>
+    </li>
+</ul>

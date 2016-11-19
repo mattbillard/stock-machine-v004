@@ -1,0 +1,37 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div  class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="analysis">The Stock Machine</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="analysis">Analyse Stocks</a></li>
+                <li><a ui-sref="datatable">Stock Database</a></li>
+                <li><a ui-sref="automate">Automate</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <!--JS bookmarks-->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">JavaScript BookMarks <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><div style="padding:3px 20px;"><strong>INSTRUCTIONS:</strong> click these links or drag them to your browser's bookmark toolbar for easier access.</div></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript: (function() { var response = prompt('Symbol',''); if (response) { var symbol = response.toUpperCase(); window.open('http://finance.yahoo.com/echarts?s='+symbol); } })();">Open Symbol in Yahoo Charts</a></li>
+                        <li><a href="javascript:(function() { var response = prompt('Symbol',''); if (response) { var symbol = response.toUpperCase(); window.open('http://finance.yahoo.com/q/ks?s='+symbol+'+Key+Statistics'); } })();">Short % of Float</a></li>
+                        <li><a href="javascript:(function() { var response = prompt('Symbol',''); if (response) { var symbol = response.toUpperCase(); window.open('http://finance.yahoo.com/q/ud?s='+symbol); } })();">Upgrade and Downgrade History</a></li>
+                        <li class="divider"></li>
+                        <li><a onclick="alert('This Javascript bookmark highlights words and/or phrases of your choice, helping you read long webpages faster and more easily.\n\nINSTRUCTIONS: drag this bookmark to your browsers\' bookmark toolbar. Click it whenever you want to highlight some words and/or phrases on a webpage.'); return false;" href="javascript: (function () { window.searchText = prompt('Type words/phrases to highlight separated by |', window.searchText || ''); var searchArray = searchText.split('|'); for (var i = 0, length = searchArray.length; i < length; i++) { searchArray[i] = searchArray[i].toLowerCase(); } var colors = [ '#ff0', '#fa0', '#9f5', '#0bf', '#ff3300', '#ff3399' ]; function findChildNodes(node) { if (node.tagName != 'SCRIPT') { var childNodes = node.childNodes; var count = childNodes.length; if (count > 0) { for (var i = 0; i < count; i++) { findChildNodes(childNodes[i]); } } else if (node.nodeName == '#text') { var text = node.nodeValue; var textWithoutWhitespace = text.replace(/\s+/g, ''); if (textWithoutWhitespace.length > 0) { searchTheTextNode(node); } } } } function searchTheTextNode(textNode) { var text, find, replace, container, color, originalText; text = textNode.nodeValue; originalText = text; for (var i = 0, count = searchArray.length; i < count; i++) { color = colors[ (i + colors.length) % colors.length ]; find = searchArray[i]; replace = '<font style=background-color:' + color + ';>' + find + '</font>'; text = replaceAll(find, replace, text); } if (originalText != text) { container = document.createElement('font'); container.innerHTML = text; textNode.parentNode.replaceChild(container, textNode); } } function replaceAll(find, replace, str) { return str.replace(new RegExp(find, 'gi'), replace); } findChildNodes(document.body); })();">Multi Highlight</a></li>
+                        <li><a onclick="alert('This Javascript bookmark will help you grab a lot of stock symbols from SeekingAlpha\'s news page so you can run them in the stock machine. \n\nINSTRUCTIONS: \n1) Drag this bookmark to your browsers\' bookmark toolbar \n2) Click it to go to SeekingAlpha\'s news page \n3) Scroll down until the page has loaded lots of news articles. \n4) Click it again to grab all the symbols on the page \n5) Copy the symbols when prompted \n6) Paste and run them in the StockMachine'); return false;" href="javascript: (function () { if (window.location.href !== 'http://seekingalpha.com/news/all'){ window.location = 'http://seekingalpha.com/news/all'; } else { var symbolsObj = {}; var elems = document.querySelectorAll('.mc_ticker_left'); for (var key in elems) { try { var elem = elems[key]; var html = elem.innerHTML; var symbol = html.replace(/<[^>]*>/g, '').trim(); symbolsObj[symbol] = symbol; } catch (error) { } } var symbolsArr = []; for (var key in symbolsObj) { symbolsArr.push(key); } var len = symbolsArr.length; var symbolsStr = symbolsArr.sort().join(', '); prompt('Copy these '+len+' symbols', symbolsStr); } })();">Copy Seeking Alpha News Symbols</a></li>
+                    </ul>
+                </li>
+                <li><a ui-sref="login">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

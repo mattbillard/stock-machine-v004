@@ -1,0 +1,156 @@
+
+<div class="row">
+
+
+
+    <!--#recent-stock-list-->
+    <recent-stock-list class="col-sm-1 hidden-xs"></recent-stock-list>
+
+
+
+
+    <div class="col-sm-11">
+
+
+        <!--#input-area-->
+        <form id="input-area" ng-submit="$ctrl.StocksServ.analyzeStocks();">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default visible-xs" type="button" ng-click="$ctrl.openRecentStockListModal();"><i class="fa fa-list-ul"></i></button>
+                </span>
+                <input type="text" ng-model="$ctrl.StocksServ.stocksInput" class="form-control" placeholder="Enter stock symbols separated by commas and hit enter" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.StocksServ.analyzeStocks();"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+
+
+
+        <!--#symbol-and-name-->
+        <div id="symbol-and-name">
+            <div ng-show="$ctrl.StocksServ.currStock.symbol">
+                {{$ctrl.StocksServ.currStock.symbol}}
+                -
+                {{$ctrl.StocksServ.currStock.name}}
+                <span ng-class="{'red-text': $ctrl.StocksServ.isBadStockMarket( $ctrl.StocksServ.currStock.stockMarket )}">
+                    ({{$ctrl.StocksServ.currStock.stockMarket}})
+                </span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <span ng-class="$ctrl.StocksServ.percentageDiscountCssClass( $ctrl.StocksServ.currStock )">
+                    {{$ctrl.StocksServ.currStock.calcs.percentageDiscount}}% Discount
+                </span>
+            </div>
+        </div>
+
+
+
+        <!--#stock-links-->
+        <div id="stock-links" ng-if="$ctrl.StocksServ.currStock.symbol">
+            <ul>
+                <li><a href="" ng-click="$ctrl.openExternalUrl('yahooCharts');">Yahoo Charts</a> </li>
+                <li><a href="" ng-click="$ctrl.openExternalUrl('yahooNews');">Yahoo News</a> </li>
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('msnNews');">MSN News</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('profile');">Profile</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('ownership');">Ownership</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('insiderTrades');">Insider Trades</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('summary');">Summary</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('stockScouter');">StockScouter</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.openExternalUrl('income');">Income</a> </li>-->
+                <!--<li><a href="" ng-click="$ctrl.saveStockToDb();">(Save to DB)</a></li>-->
+            </ul>
+        </div>
+
+
+
+        <!--#stock-metrics-table-->
+        <stock-metrics-table class="table table-condensed table-striped" currStock="$ctrl.StocksServ.currStock"></stock-metrics-table>
+
+
+
+
+        <!--#stockCalcs-->
+        <div id="stockCalcs" class="form-horizontal">
+
+            <stock-input-calc
+                key="estEpsGrowthRate"
+                label="Est 10yr EPS Growth Rate:"
+            >Avg. of ROICs and Equities (weighted towards ROIC)</stock-input-calc>
+            <stock-input-calc
+                key="analystsEstEarningsGrowthRate"
+                label="Analysts' Est Earnings Growth Rate:"
+                readonly="true"
+            ><!--<a ng-click=$ctrl.openExternalUrl('analystsEstEarningsGrowthRate'); >From chart</a>--></stock-input-calc>
+            <stock-input-calc
+                key="rule1GrowthRate"
+                label="Rule 1 Growth Rate:"
+            >The smaller of these two</stock-input-calc>
+
+
+            <div class="control-group">&nbsp;</div>
+
+
+            <stock-input-calc
+                key="defaultPe"
+                label="Default PE:"
+            >Double Rule 1 Growth Rate</stock-input-calc>
+            <stock-input-calc
+                key="medianPe"
+                label="Median PE:"
+            ><!--<a ng-click=$ctrl.openExternalUrl('pe'); >Median PE</a>--></stock-input-calc>
+            <stock-input-calc
+                key="rule1Pe"
+                label="Rule 1 PE:"
+            >The smaller or the average of these two.</stock-input-calc>
+
+
+            <div class="control-group">&nbsp;</div>
+
+
+            <stock-input-calc
+                key="currentEps"
+                label="Current EPS:"
+            ></stock-input-calc>
+            <stock-input-calc
+                key="est10yrEps"
+                label="Est EPS in 10 years:"
+            >Current EPS grown for 10yrs at Rule 1 Growth Rate</stock-input-calc>
+            <stock-input-calc
+                key="est10yrStockPrice"
+                label="Est Future Stock Price:"
+            >Est EPS in 10 yrs * Rule 1 PE</stock-input-calc>
+
+
+            <div class="control-group">&nbsp;</div>
+
+
+            <stock-input-calc
+                key="currentStockPrice"
+                label="Current Stock Price:"
+            ></stock-input-calc>
+            <stock-input-calc
+                key="stockStickerPrice"
+                label="Stock&nbsp;Sticker&nbsp;Price (What it's worth):"
+                readonly="true"
+            >Est Future Stock Price / 4  (Allows for a 15% growth rate)</stock-input-calc>
+            <stock-input-calc
+                key="mosStockPrice"
+                label="MOS&nbsp;Stock&nbsp;Price (50% Discount):"
+                readonly="true"
+            >Half Stock Sticker Price</stock-input-calc>
+            <stock-input-calc
+                key="percentageDiscount"
+                label="Percentage Discount:"
+                readonly="true"
+                class="percentage-discount"
+                ng-class="$ctrl.StocksServ.percentageDiscountCssClass( $ctrl.StocksServ.currStock )"
+            >(Positive is good. Negative is bad.)</stock-input-calc>
+            <stock-input-calc
+                key="paybackTime"
+                label="Payback Time:"
+                readonly="true"
+            >Years for Cummulative Net Income (grown at Rule 1 growth rate) to exceed Market Cap</stock-input-calc>
+        </div>
+
+    </div>
+</div>

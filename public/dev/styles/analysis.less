@@ -1,0 +1,122 @@
+
+recent-stock-list {
+  border: solid 1px #eee;
+  padding: 5px;
+  background: #fff;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    white-space: nowrap;
+  }
+  li {
+    margin: 0.5em 0 0 0;
+  }
+  .removeLink {
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+.modal-body #recent-stock-list {
+  border: none;
+  padding: 0;
+  margin: -10px;
+}
+
+#stock-links {
+  display: inline-block;
+  width: auto;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    float: left;
+  }
+  a {
+    display: inline-block;
+    margin: 4px 0 0 0;
+    padding: 0px 7px;
+    border-right: solid 1px #777;
+  }
+  li:first-child a {
+    padding-left: 0;
+  }
+  li:last-child a {
+    border: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
+
+#symbol-and-name {
+  margin: 20px 0 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+stock-metrics-table {
+  overflow-x: auto;
+  margin-bottom: 10px;
+
+  th {
+    text-align: right;
+  }
+  td {
+    text-align: right;
+  }
+  th a {
+    display: block;
+  }
+
+  simple-chart {
+    .chart {
+      width: 120px;
+      height: 100px;
+      float: right;
+      border: solid 1px #ddd;
+      border-radius: 4px;
+
+      .highcharts-axis,
+      .highcharts-grid {
+        display: none;
+      }
+    }
+  }
+}
+
+
+
+
+.discount-not-numeric, .discount-not-numeric input, .discount-not-numeric a {
+  color: #b99 !important;
+}
+
+.negative-discount, .negative-discount input, .negative-discount a {
+  color: #900 !important;
+}
+
+.some-discount, .some-discount input, .some-discount a {
+  color: #24a !important;
+}
+
+.great-discount, .great-discount input, .great-discount a {
+  color: #d90 !important;
+}
+
+.reached-mos, .reached-mos input, .reached-mos a {
+  color: #0c0 !important;
+}
+
+.percentage-discount input {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.percentage-discount { color:#333 !important; }
+
