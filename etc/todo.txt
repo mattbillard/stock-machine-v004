@@ -143,12 +143,14 @@
 TODO@mattbillard
 
 - MEAN stack
-    - Fill DB if empty
-    - bin/run_dev and run_prod
+    - Routes
     - Controllers
     - Models
-- Angular 2
+    - Fill DB if empty
+    - bin/run_dev and run_prod
 - Later
+    - Testing
+    - Angular 2
     - Redo calcs
     - Login
     - Switch back to getting fresh data rather than pulling stock from DB

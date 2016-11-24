@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Stock Machine</title>
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- endinject -->
+</head>
+<body>
+
+    {% block body %}{% endblock %}
+
+    <!-- inject:js -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="bower_components/highcharts/highcharts.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="scripts/stock-machine/app.js"></script>
+    <script src="scripts/stock-machine/components/header-nav.js"></script>
+    <script src="scripts/stock-machine/components/recent-stock-list.js"></script>
+    <script src="scripts/stock-machine/components/simple-chart.js"></script>
+    <script src="scripts/stock-machine/components/stock-input-calc.js"></script>
+    <script src="scripts/stock-machine/components/stock-metrics-table.js"></script>
+    <script src="scripts/stock-machine/directives/xng-enter.js"></script>
+    <script src="scripts/stock-machine/filters/red-green-num.js"></script>
+    <script src="scripts/stock-machine/filters/site-num.js"></script>
+    <script src="scripts/stock-machine/filters/site-percentage.js"></script>
+    <script src="scripts/stock-machine/modals/recent-stock-list-modal.js"></script>
+    <script src="scripts/stock-machine/services/stocks-serv.js"></script>
+    <script src="scripts/stock-machine/services/utils-serv.js"></script>
+    <script src="scripts/stock-machine/views/analysis.js"></script>
+    <script src="scripts/stock-machine/views/automate.js"></script>
+    <script src="scripts/stock-machine/views/data-table.js"></script>
+    <script src="scripts/stock-machine/views/login.js"></script>
+    <!-- endinject -->
+</body>
+</html>

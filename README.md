@@ -4,6 +4,7 @@ Stock Machine hobby project built with the MEAN stack
 ### Setup
 ````
 npm install bower -g
+npm install nodemon -g
 
 npm install
 bower install

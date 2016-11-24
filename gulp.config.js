@@ -20,10 +20,10 @@ module.exports = function() {
     };
 
     var inject = {
-        target: 'server/views/base.html',
+        target: 'server/views/layout.base.twig',
         dest: 'server/views',
-        devFileName: 'dev.html',
-        prodFileName: 'prod.html'
+        devFileName: 'layout.dev.twig',
+        prodFileName: 'layout.prod.twig'
     };
 
 
