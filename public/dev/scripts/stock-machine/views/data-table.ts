@@ -33,6 +33,8 @@ angular.module('stockMachineApp').component('datatable', {
 
         getStockData(searchQuery: any) {
             this.$log.log('Searching: ', JSON.stringify(searchQuery, null, '    '));
+
+            this.state = 'loading';
             this.$http({
                     method: 'POST',
                     url: '/api/stocks/search/',
@@ -41,17 +43,12 @@ angular.module('stockMachineApp').component('datatable', {
                     }
                 })
                 .success((data, status, headers, config) => {
-                    if (angular.isArray(data) === false) {
-                        this.$log.error(data);
-                        this.state = 'loaded';
-
-                    } else {
-                        this.data = data;
-                        this.state = 'loaded';
-                    }
+                    this.data = data;
+                    this.state = 'loaded';
                 })
                 .error((data, status, headers, config) => {
-                    //this.$log.log('ERROR : '+data, '\n');
+                    this.$log.error('ERROR : '+data, '\n');
+                    this.state = 'error';
                 });
         }
 
@@ -61,10 +58,6 @@ angular.module('stockMachineApp').component('datatable', {
         getStocks() {
             console.clear();
             this.clearTable();
-
-            //bugfix: smart-table doesn't like reinitializing the table after an XHR request. Use this and ng-if to destroy/recreate the smart-table
-            this.state = 'loading';
-
             this.getStockData(this.search);
         }
     }

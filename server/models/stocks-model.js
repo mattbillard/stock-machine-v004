@@ -49,11 +49,7 @@ function getStockFromDb(symbol, callback) {
 }
 
 function search(searchQuery, callback) {
-    try {
-        var mongoDbQuery = stocksQueryGen.parseSearch(searchQuery);
-    }
-    catch(err) { console.error(err); }
-
+    var mongoDbQuery = stocksQueryGen.parseSearch(searchQuery);
     Stock.find(mongoDbQuery, {}, {
             limit: 999
         },

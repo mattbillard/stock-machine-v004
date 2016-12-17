@@ -12,7 +12,9 @@ angular
         'ui.sortable',
         'smart-table'
     ])
-    .config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+    .config(function($httpProvider, $stateProvider, $urlRouterProvider) {
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
         $urlRouterProvider.otherwise("/login");
 
         $stateProvider
@@ -32,4 +34,4 @@ angular
                 url: "/datatable",
                 template: '<datatable></datatable>'
             });
-    }]);
+    });

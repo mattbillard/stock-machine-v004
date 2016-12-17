@@ -65,6 +65,10 @@
         </tbody>
     </table>
 
+    <div class="alert alert-danger" ng-if="$ctrl.state==='error'">
+        There was an error with the query
+    </div>
+
     <!-- Loading -->
     <div ng-if="$ctrl.state==='loading'" class="text-center" style="padding: 100px;">
         <i class="fa fa-refresh fa-spin fa-lg"></i>
