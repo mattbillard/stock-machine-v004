@@ -9,6 +9,7 @@ angular.module('stockMachineApp').component('datatable', {
         private $http: any;
         private $log: any;
         private $scope: any;
+        private QueryGenServ: any;
 
         public data: any = [];
         public search: any = {};
@@ -16,10 +17,11 @@ angular.module('stockMachineApp').component('datatable', {
 
         // PRIVATE
 
-        constructor($http, $log, $scope) {
+        constructor($http, $log, $scope, QueryGenServ) {
             this.$http = $http;
             this.$scope = $scope;
             this.$log = $log;
+            this.QueryGenServ = QueryGenServ;
 
             $scope.$watch('$ctrl.search', () => {
                 this.clearTable();
@@ -31,56 +33,42 @@ angular.module('stockMachineApp').component('datatable', {
             this.data = [];
         }
 
+        getStockData(whereCond: string) {
+            this.$log.log('Searching: ', JSON.stringify(whereCond, null, '    '));
+            this.$http({
+                    method: 'POST',
+                    url: '/api/stocks/search/',
+                    data: {
+                        whereCond: whereCond
+                    }
+                })
+                .success((data, status, headers, config) => {
+                    if (angular.isArray(data) === false) {
+                        this.$log.error( $('<div></div>').html(data).text() );
+                        this.state = 'loaded';
+
+                    } else {
+                        this.data = data;
+                        this.state = 'loaded';
+                    }
+                })
+                .error((data, status, headers, config) => {
+                    //this.$log.log('ERROR : '+data, '\n');
+                });
+        }
+
 
         // PUBLIC
 
         getStocks() {
+            console.clear();
             this.clearTable();
 
             //bugfix: smart-table doesn't like reinitializing the table after an XHR request. Use this and ng-if to destroy/recreate the smart-table
             this.state = 'loading';
 
-            let whereArr = [];
-            angular.forEach(this.search, (val, key) => {
-                val = val.trim();
-                if (val) {
-                    //If they did not add an operator (e.g. >|<|=, etc) add ='' for them
-                    if (!val.match(/>|<|!=|=|not like|like|is not null|is null/gi)) {
-                        val = '="'+val+'"';
-                    }
-
-                    //Add in the key/column name
-                    val = val.replace(/(>=|<=|>|<|!=|=|not like|like|is not null|is null)/gi, key+' $1 ');
-                    whereArr.push(val);
-                }
-            });
-
-            //Finish whereCond
-            let whereCond = whereArr.join('  AND  ');
-            this.$log.log('Getting stocks WHERE '+whereCond);
-
-            this.$http({
-                method: 'POST',
-                url: '/api/stocks/search/',
-                data: {
-                    whereCond: whereCond
-                }
-            })
-            .success((data, status, headers, config) => {
-                if (angular.isArray(data) === false) {
-                    this.$log.error( $('<div></div>').html(data).text() );
-                    this.state = 'loaded';
-
-                } else {
-                    this.data = data.map(function(row){
-                        return JSON.parse(row['allInfoAsJson']);
-                    });
-                    this.state = 'loaded';
-                }
-            })
-            .error((data, status, headers, config) => {
-                this.$log.log('ERROR : '+data, '\n');
-            });
+            let whereCond = this.QueryGenServ.parseSearch(this.search);
+            this.getStockData(whereCond);
         }
     }
 });

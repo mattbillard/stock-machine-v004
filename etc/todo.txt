@@ -138,6 +138,14 @@
     - server/views
     - .gitignore, bower, gulp, npm, tsconfig, readme
 
+2016-11-30
+- Data table
+    - Query generator
+
+2016-12-12
+- Data table
+    - Query generator
+
 
 
 TODO@mattbillard
@@ -146,8 +154,7 @@ TODO@mattbillard
     - Routes
     - Controllers
     - Models
-    - Fill DB if empty
-    - bin/run_dev and run_prod
+    - See todo2.txt
 - Later
     - Testing
     - Angular 2

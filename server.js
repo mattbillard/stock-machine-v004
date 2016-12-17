@@ -6,8 +6,12 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev',
     config = require('./server/config/config')[env];
 
 require('./server/config/express')(app, config);
-require('./server/routes/main')(app);
+require('./server/config/mongoose')(config);
+
+require('./server/routes/core-routes')(app);
+require('./server/routes/stocks-routes')(app);
+
 require('./server/config/errors')(app, config);
 
 app.listen(config.port);
-console.log('Listening on port ' + config.port + '...');
+console.log('\nListening on port ' + config.port + '...');

@@ -1,5 +1,6 @@
 
 # PROJECT
+data/db/
 node_modules/
 public/dev/bower_components/
 public/dev/scripts/stock-machine/**/*.js
