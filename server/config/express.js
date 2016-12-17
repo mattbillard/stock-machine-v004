@@ -24,4 +24,7 @@ module.exports = function (app, config) {
     //app.use(session({secret: 'super secret', resave: false, saveUninitialized: false}));
     //app.use(passport.initialize());
     //app.use(passport.session());
+
+    app.locals.env = config.env;
+    app.locals.layoutFile = 'layout.'+config.env+'.twig';
 };

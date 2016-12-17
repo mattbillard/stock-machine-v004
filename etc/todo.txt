@@ -142,9 +142,15 @@
 - Data table
     - Query generator
 
-2016-12-12
+2016-12-13
 - Data table
     - Query generator
+
+2016-12-17
+- Data table
+    - Query generator
+- Basic error handling
+- Layout file depends on dev vs prod
 
 
 
