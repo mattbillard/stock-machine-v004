@@ -9,7 +9,6 @@ angular.module('stockMachineApp').component('datatable', {
         private $http: any;
         private $log: any;
         private $scope: any;
-        private QueryGenServ: any;
 
         public data: any = [];
         public search: any = {};
@@ -17,11 +16,10 @@ angular.module('stockMachineApp').component('datatable', {
 
         // PRIVATE
 
-        constructor($http, $log, $scope, QueryGenServ) {
+        constructor($http, $log, $scope) {
             this.$http = $http;
             this.$scope = $scope;
             this.$log = $log;
-            this.QueryGenServ = QueryGenServ;
 
             $scope.$watch('$ctrl.search', () => {
                 this.clearTable();
@@ -33,18 +31,18 @@ angular.module('stockMachineApp').component('datatable', {
             this.data = [];
         }
 
-        getStockData(whereCond: string) {
-            this.$log.log('Searching: ', JSON.stringify(whereCond, null, '    '));
+        getStockData(searchQuery: any) {
+            this.$log.log('Searching: ', JSON.stringify(searchQuery, null, '    '));
             this.$http({
                     method: 'POST',
                     url: '/api/stocks/search/',
                     data: {
-                        whereCond: whereCond
+                        searchQuery: searchQuery
                     }
                 })
                 .success((data, status, headers, config) => {
                     if (angular.isArray(data) === false) {
-                        this.$log.error( $('<div></div>').html(data).text() );
+                        this.$log.error(data);
                         this.state = 'loaded';
 
                     } else {
@@ -67,8 +65,7 @@ angular.module('stockMachineApp').component('datatable', {
             //bugfix: smart-table doesn't like reinitializing the table after an XHR request. Use this and ng-if to destroy/recreate the smart-table
             this.state = 'loading';
 
-            let whereCond = this.QueryGenServ.parseSearch(this.search);
-            this.getStockData(whereCond);
+            this.getStockData(this.search);
         }
     }
 });

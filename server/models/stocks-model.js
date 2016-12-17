@@ -21,6 +21,7 @@ var stockSchema = mongoose.Schema({
     }
 });
 var Stock = mongoose.model('Stock', stockSchema);
+var stocksQueryGen = require('./stocks-query-gen');
 
 
 
@@ -47,8 +48,13 @@ function getStockFromDb(symbol, callback) {
     });
 }
 
-function search(whereCond, callback) {
-    Stock.find(whereCond, {}, {
+function search(searchQuery, callback) {
+    try {
+        var mongoDbQuery = stocksQueryGen.parseSearch(searchQuery);
+    }
+    catch(err) { console.error(err); }
+
+    Stock.find(mongoDbQuery, {}, {
             limit: 999
         },
         function(err, stocks) {

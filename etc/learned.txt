@@ -1,0 +1,6 @@
+LEARNED / SELF-REMINDERS
+
+
+NODE
+- Errors
+    - If you are getting a 500 error but not seeing any error, add some try/catches to your code

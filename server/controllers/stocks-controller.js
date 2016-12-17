@@ -11,8 +11,7 @@ function redoCalcs(req, res) {
 }
 
 function search(req, res) {
-    //res.json(req.body.whereCond);
-    stocksModel.search(req.body.whereCond, function(stocks){
+    stocksModel.search(req.body.searchQuery, function(stocks){
         res.json(stocks);
     });
 }
