@@ -51,7 +51,7 @@ function getStockFromDb(symbol, callback) {
 function search(searchFor, callback) {
     var mongoDbQuery = stocksQueryGen.parseSearch(searchFor.cols),
         limit = searchFor.limit || 999,
-        skip = (searchFor.pageIdx * limit) || 0,
+        skip = ((searchFor.pageNum - 1) * limit) || 0,
         sort = searchFor.sort || null;
 
     console.log(JSON.stringify(mongoDbQuery, null, '    '));

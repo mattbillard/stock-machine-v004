@@ -10,22 +10,29 @@ angular.module('stockMachineApp').component('datatable', {
         private $log: any;
         private $scope: any;
 
-        public count: number = 0;
-        public rows: any = [];
+        public data: any = {
+            count: 0,
+            rows: []
+        };
         public options: any = {
             limit: {
                 default: 25,
                 options: [25, 50, 100, 250, 500]
             }
         };
+        public paginate: any = {
+            maxSize: 5,
+            showingXofY: ''
+        };
         public searchFor: any = {
             cols: {},
             limit: this.options.limit.default,
-            pageIdx: 0,
+            pageNum: 1,
             sort: {}
         };
         public state: string = '';
 
+        
         // PRIVATE
 
         constructor($http, $log, $scope) {
@@ -34,22 +41,18 @@ angular.module('stockMachineApp').component('datatable', {
             this.$log = $log;
 
             $scope.$watch('$ctrl.searchFor', () => {
-                this.clearCount();
-                this.clearTable();
+                this.clearData();
             }, true);
             this.doSearch();
         }
 
-        clearCount() {
-            this.count = 0;
-        }
-
-        clearTable() {
-            this.rows = [];
+        clearData() {
+            this.data.count = 0;
+            this.data.rows = [];
+            this.paginate.showingXofY = '';
         }
 
         doXhr() {
-            console.clear();
             this.$log.log('Searching: ', JSON.stringify(this.searchFor, null, '    '));
 
             this.state = 'loading';
@@ -61,9 +64,10 @@ angular.module('stockMachineApp').component('datatable', {
                     }
                 })
                 .success((response, status, headers, config) => {
-                    this.count = response.count;
-                    this.rows = response.rows;
+                    this.data.count = response.count;
+                    this.data.rows = response.rows;
                     this.state = 'loaded';
+                    this.makeShowingXofY();
                 })
                 .error((response, status, headers, config) => {
                     this.$log.error(response);
@@ -72,11 +76,15 @@ angular.module('stockMachineApp').component('datatable', {
         }
 
         resetPageIdx() {
-            this.searchFor.pageIdx = 0;
+            this.searchFor.pageNum = 1;
         }
 
 
         // PUBLIC
+
+        doPaginate() {
+            this.doXhr();
+        }
 
         doSearch() {
             this.resetPageIdx();
@@ -94,12 +102,6 @@ angular.module('stockMachineApp').component('datatable', {
             this.doSearch();
         }
 
-        getShowingXofY() {
-            var min = this.searchFor.pageIdx * this.searchFor.limit +1,
-                max = (this.searchFor.pageIdx+1) * this.searchFor.limit;
-            return 'Showing '+min+'-'+max+' of '+this.count;
-        }
-
         getSortClass(colName) {
             var result =
                 this.searchFor.sort['symbol']===1 ? 'fa-caret-up' :
@@ -108,8 +110,15 @@ angular.module('stockMachineApp').component('datatable', {
             return result;
         }
 
-        paginate() {
-            this.doXhr();
+        makeShowingXofY() {
+            var min = (this.searchFor.pageNum-1) * this.searchFor.limit +1,
+                max = this.searchFor.pageNum * this.searchFor.limit;
+
+            if (max > this.data.count) {
+                max = this.data.count;
+            }
+
+            this.paginate.showingXofY = 'Showing '+min+'-'+max+' of '+this.data.count;
         }
     }
 });

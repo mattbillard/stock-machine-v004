@@ -3,8 +3,24 @@
     <h1>Stock Database</h1>
 
     <select ng-model="$ctrl.searchFor.limit" ng-options="o as o for o in $ctrl.options.limit.options" ng-change="$ctrl.doSearch()"></select>
-    <input type="number" ng-model="$ctrl.searchFor.pageIdx" ng-change="$ctrl.paginate()" min="0" />
-    <strong>{{$ctrl.getShowingXofY()}}</strong>
+
+    <div ng-if="$ctrl.state==='loaded'">
+        <ul uib-pagination
+            ng-model="$ctrl.searchFor.pageNum"
+            ng-change="$ctrl.doPaginate()"
+
+            items-per-page="$ctrl.searchFor.limit"
+            total-items="$ctrl.data.count"
+            max-size="$ctrl.paginate.maxSize"
+
+            boundary-links="true"
+            first-text="l<"
+            previous-text="<<"
+            next-text=">>"
+            last-text=">l"
+        ></ul>
+        <div>{{$ctrl.paginate.showingXofY}}</div>
+    </div>
 
     <br>
     <br>
@@ -88,7 +104,7 @@
             </tr>
         </thead>
         <tbody ng-if="$ctrl.state==='loaded'">
-            <tr ng-repeat="stockObj in $ctrl.rows">
+            <tr ng-repeat="stockObj in $ctrl.data.rows">
                 <td>{{stockObj.symbol}}</td>
                 <td>{{stockObj.name}}</td>
                 <td>{{stockObj.nums.currentStockPrice}}</td>
