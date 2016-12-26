@@ -3,8 +3,8 @@
 data/db/
 node_modules/
 public/dev/bower_components/
-public/dev/scripts/stock-machine/**/*.js
-public/dev/scripts/stock-machine/**/*.js.map
+public/dev/scripts/app/**/*.js
+public/dev/scripts/app/**/*.js.map
 public/dev/styles/*.css
 public/prod/
 temp/
