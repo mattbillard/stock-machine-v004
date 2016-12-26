@@ -149,8 +149,16 @@
 2016-12-17
 - Data table
     - Query generator
+    - Pagination
 - Basic error handling
-- Layout file depends on dev vs prod
+- Layout file is different for dev vs prod
+
+2016-12-26
+- Data table
+    - Sort
+    - Pagination
+    - Errors
+    - UI
 
 
 

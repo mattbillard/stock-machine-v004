@@ -41,7 +41,8 @@ angular.module('stockMachineApp').component('datatable', {
             this.$scope = $scope;
             this.$log = $log;
 
-            $scope.$watch('$ctrl.searchFor', () => {
+            $scope.$watch('$ctrl.searchFor.cols', (o, n) => {
+                if (angular.equals(o, n)) { return; }
                 this.clearData();
             }, true);
             this.doSearch();
@@ -52,6 +53,7 @@ angular.module('stockMachineApp').component('datatable', {
             this.data.rows = [];
             this.data.error = '';
             this.data.showingXofY = '';
+            this.data.state = 'CLEARED';
         }
 
         doXhr() {
@@ -86,11 +88,13 @@ angular.module('stockMachineApp').component('datatable', {
         // PUBLIC
 
         doPaginate() {
+            this.clearData();
             this.doXhr();
         }
 
         doSearch() {
             this.resetPageIdx();
+            this.clearData();
             this.doXhr();
         }
 
