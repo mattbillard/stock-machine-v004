@@ -18,9 +18,10 @@ angular.module('stockMachineApp').component('datatable', {
             }
         };
         public searchFor: any = {
+            cols: {},
             limit: this.options.limit.default,
             pageIdx: 0,
-            cols: {}
+            sort: {}
         };
         public state: string = '';
 
@@ -71,12 +72,31 @@ angular.module('stockMachineApp').component('datatable', {
 
         // PUBLIC
 
-        paginate() {
+        doSearch() {
+            this.resetPage();
             this.doXhr();
         }
 
-        doSearch() {
-            this.resetPage();
+        doSort(colName: string) {
+            if (this.searchFor.sort[colName]) {
+                this.searchFor.sort[colName] *= -1;
+            } else {
+                this.searchFor.sort = {};
+                this.searchFor.sort[colName] = 1;
+            }
+
+            this.doSearch();
+        }
+
+        getSortClass(colName) {
+            var result =
+                this.searchFor.sort['symbol']===1 ? 'fa-caret-up' :
+                this.searchFor.sort['symbol']===-1 ? 'fa-caret-down' :
+                '';
+            return result;
+        }
+
+        paginate() {
             this.doXhr();
         }
     }

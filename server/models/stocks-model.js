@@ -54,7 +54,8 @@ function search(searchFor, callback) {
     var mongoDbQuery = stocksQueryGen.parseSearch(searchFor.cols),
         options = {
             limit: limit,
-            skip: (searchFor.pageIdx * limit) || 0
+            skip: (searchFor.pageIdx * limit) || 0,
+            sort: searchFor.sort || null
         };
 
 

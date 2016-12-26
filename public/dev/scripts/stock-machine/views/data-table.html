@@ -9,19 +9,49 @@
     <br>
     <br>
 
-    <table st-table="$ctrl.data" class="table table-bordered table-striped table-condensed">
+    <table class="table table-bordered table-striped table-condensed">
         <thead>
             <tr>
-                <th st-sort="symbol">Symbol</th>
-                <th st-sort="name">Name</th>
-                <th st-sort="nums.currentStockPrice">Current Price</th>
-                <th st-sort="calcs.percentageDiscount">Percentage Discount</th>
-                <th st-sort="nums.roic.numbers.average">ROIC</th>
-                <th st-sort="nums.bvps.growths.average">BVPS</th>
-                <th st-sort="nums.sales.growths.average">Sales</th>
-                <th st-sort="nums.eps.growths.average">EPS</th>
-                <th st-sort="nums.cashFlow.growths.average">Cash Flow</th>
-                <th st-sort="stockMarket">Stock Market</th>
+                <th ng-click="$ctrl.doSort('symbol')">
+                    <span class="fa {{$ctrl.getSortClass('symbol')}}"></span>
+                    Symbol
+                </th>
+                <th ng-click="$ctrl.doSort('name')">
+                    <span class="fa {{$ctrl.getSortClass('name')}}"></span>
+                    Name
+                </th>
+                <th ng-click="$ctrl.doSort('nums.currentStockPrice')">
+                    <span class="fa {{$ctrl.getSortClass('nums.currentStockPrice')}}"></span>
+                    Current Price
+                </th>
+                <th ng-click="$ctrl.doSort('calcs.percentageDiscount')">
+                    <span class="fa {{$ctrl.getSortClass('calcs.percentageDiscount')}}"></span>
+                    Percentage Discount
+                </th>
+                <th ng-click="$ctrl.doSort('nums.roic.numbers.average')">
+                    <span class="fa {{$ctrl.getSortClass('nums.roic.numbers.average')}}"></span>
+                    ROIC
+                </th>
+                <th ng-click="$ctrl.doSort('nums.bvps.growths.average')">
+                    <span class="fa {{$ctrl.getSortClass('nums.bvps.growths.average')}}"></span>
+                    BVPS
+                </th>
+                <th ng-click="$ctrl.doSort('nums.sales.growths.average')">
+                    <span class="fa {{$ctrl.getSortClass('nums.sales.growths.average')}}"></span>
+                    Sales
+                </th>
+                <th ng-click="$ctrl.doSort('nums.eps.growths.average')">
+                    <span class="fa {{$ctrl.getSortClass('nums.eps.growths.average')}}"></span>
+                    EPS
+                </th>
+                <th ng-click="$ctrl.doSort('nums.cashFlow.growths.average')">
+                    <span class="fa {{$ctrl.getSortClass('nums.cashFlow.growths.average')}}"></span>
+                    Cash Flow
+                </th>
+                <th ng-click="$ctrl.doSort('stockMarket')">
+                    <span class="fa {{$ctrl.getSortClass('stockMarket')}}"></span>
+                    Stock Market
+                </th>
             </tr>
             <tr>
                 <th>
