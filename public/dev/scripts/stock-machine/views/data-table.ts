@@ -12,17 +12,19 @@ angular.module('stockMachineApp').component('datatable', {
 
         public data: any = {
             count: 0,
-            rows: []
+            error: '',
+            rows: [],
+            showingXofY: '',
+            state: ''
         };
         public options: any = {
             limit: {
                 default: 25,
                 options: [25, 50, 100, 250, 500]
+            },
+            paginate: {
+                maxSize: 5
             }
-        };
-        public paginate: any = {
-            maxSize: 5,
-            showingXofY: ''
         };
         public searchFor: any = {
             cols: {},
@@ -30,7 +32,6 @@ angular.module('stockMachineApp').component('datatable', {
             pageNum: 1,
             sort: {}
         };
-        public state: string = '';
 
         
         // PRIVATE
@@ -49,13 +50,14 @@ angular.module('stockMachineApp').component('datatable', {
         clearData() {
             this.data.count = 0;
             this.data.rows = [];
-            this.paginate.showingXofY = '';
+            this.data.error = '';
+            this.data.showingXofY = '';
         }
 
         doXhr() {
             this.$log.log('Searching: ', JSON.stringify(this.searchFor, null, '    '));
+            this.data.state = 'LOADING';
 
-            this.state = 'loading';
             this.$http({
                     method: 'POST',
                     url: '/api/stocks/search/',
@@ -66,12 +68,13 @@ angular.module('stockMachineApp').component('datatable', {
                 .success((response, status, headers, config) => {
                     this.data.count = response.count;
                     this.data.rows = response.rows;
-                    this.state = 'loaded';
+                    this.data.state = 'LOADED';
                     this.makeShowingXofY();
                 })
                 .error((response, status, headers, config) => {
                     this.$log.error(response);
-                    this.state = 'error';
+                    this.data.error = response;
+                    this.data.state = 'ERROR';
                 });
         }
 
@@ -118,7 +121,7 @@ angular.module('stockMachineApp').component('datatable', {
                 max = this.data.count;
             }
 
-            this.paginate.showingXofY = 'Showing '+min+'-'+max+' of '+this.data.count;
+            this.data.showingXofY = 'Showing '+min+'-'+max+' of '+this.data.count;
         }
     }
 });

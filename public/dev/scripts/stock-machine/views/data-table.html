@@ -4,14 +4,14 @@
 
     <select ng-model="$ctrl.searchFor.limit" ng-options="o as o for o in $ctrl.options.limit.options" ng-change="$ctrl.doSearch()"></select>
 
-    <div ng-if="$ctrl.state==='loaded'">
+    <div ng-if="$ctrl.data.state==='LOADED'">
         <ul uib-pagination
             ng-model="$ctrl.searchFor.pageNum"
             ng-change="$ctrl.doPaginate()"
 
             items-per-page="$ctrl.searchFor.limit"
             total-items="$ctrl.data.count"
-            max-size="$ctrl.paginate.maxSize"
+            max-size="$ctrl.options.paginate.maxSize"
 
             boundary-links="true"
             first-text="l<"
@@ -19,7 +19,7 @@
             next-text=">>"
             last-text=">l"
         ></ul>
-        <div>{{$ctrl.paginate.showingXofY}}</div>
+        <div>{{$ctrl.data.showingXofY}}</div>
     </div>
 
     <br>
@@ -103,7 +103,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody ng-if="$ctrl.state==='loaded'">
+        <tbody ng-if="$ctrl.data.state==='LOADED'">
             <tr ng-repeat="stockObj in $ctrl.data.rows">
                 <td>{{stockObj.symbol}}</td>
                 <td>{{stockObj.name}}</td>
@@ -119,13 +119,14 @@
         </tbody>
     </table>
 
-    <div class="well well-danger" ng-if="$ctrl.state==='ERR'"></div>
-
-    <!-- Loading -->
-    <div ng-if="$ctrl.state==='loading'" class="text-center" style="padding: 100px;">
-        <i class="fa fa-refresh fa-spin fa-lg"></i>
+    <!-- error -->
+    <div class="alert alert-danger" ng-if="$ctrl.data.state==='ERROR'">
+        {{$ctrl.data.error}}
     </div>
 
-<!--    <pre>{{dataTable | json}}</pre>-->
+    <!-- loading -->
+    <div ng-if="$ctrl.data.state==='LOADING'" class="text-center" style="padding: 100px;">
+        <i class="fa fa-refresh fa-spin fa-lg"></i>
+    </div>
 
 </div>

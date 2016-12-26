@@ -63,8 +63,8 @@ function search(searchFor, callback) {
     query.count(function(err, count) {
         query
             .sort(sort)
-            .skip(skip)
             .limit(limit)
+            .skip(skip)
             .exec('find', function(err, stocks) {
                 var results = {
                     count: count,
