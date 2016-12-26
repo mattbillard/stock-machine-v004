@@ -4,6 +4,7 @@
 
     <select ng-model="$ctrl.searchFor.limit" ng-options="o as o for o in $ctrl.options.limit.options" ng-change="$ctrl.doSearch()"></select>
     <input type="number" ng-model="$ctrl.searchFor.pageIdx" ng-change="$ctrl.paginate()" min="0" />
+    <strong>{{$ctrl.getShowingXofY()}}</strong>
 
     <br>
     <br>
@@ -87,7 +88,7 @@
             </tr>
         </thead>
         <tbody ng-if="$ctrl.state==='loaded'">
-            <tr ng-repeat="stockObj in $ctrl.data">
+            <tr ng-repeat="stockObj in $ctrl.rows">
                 <td>{{stockObj.symbol}}</td>
                 <td>{{stockObj.name}}</td>
                 <td>{{stockObj.nums.currentStockPrice}}</td>

@@ -49,24 +49,30 @@ function getStockFromDb(symbol, callback) {
 }
 
 function search(searchFor, callback) {
-    var limit = searchFor.limit || 999;
-
     var mongoDbQuery = stocksQueryGen.parseSearch(searchFor.cols),
-        options = {
-            limit: limit,
-            skip: (searchFor.pageIdx * limit) || 0,
-            sort: searchFor.sort || null
-        };
-
+        limit = searchFor.limit || 999,
+        skip = (searchFor.pageIdx * limit) || 0,
+        sort = searchFor.sort || null;
 
     console.log(JSON.stringify(mongoDbQuery, null, '    '));
-    console.log(JSON.stringify(options, null, '    '));
+    console.log('sort: ', sort);
+    console.log('skip: ', skip);
+    console.log('limit: ', limit);
 
-    Stock.find(mongoDbQuery, {}, options,
-        function(err, stocks) {
-            callback(stocks);
-        }
-    );
+    var query = Stock.find(mongoDbQuery);
+    query.count(function(err, count) {
+        query
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec('find', function(err, stocks) {
+                var results = {
+                    count: count,
+                    rows: stocks
+                };
+                callback(results);
+            });
+    });
 }
 
 function automateNextStock(callback) {

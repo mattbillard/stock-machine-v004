@@ -10,7 +10,8 @@ angular.module('stockMachineApp').component('datatable', {
         private $log: any;
         private $scope: any;
 
-        public data: any = [];
+        public count: number = 0;
+        public rows: any = [];
         public options: any = {
             limit: {
                 default: 25,
@@ -33,18 +34,22 @@ angular.module('stockMachineApp').component('datatable', {
             this.$log = $log;
 
             $scope.$watch('$ctrl.searchFor', () => {
+                this.clearCount();
                 this.clearTable();
             }, true);
             this.doSearch();
         }
 
+        clearCount() {
+            this.count = 0;
+        }
+
         clearTable() {
-            this.data = [];
+            this.rows = [];
         }
 
         doXhr() {
             console.clear();
-            this.clearTable();
             this.$log.log('Searching: ', JSON.stringify(this.searchFor, null, '    '));
 
             this.state = 'loading';
@@ -55,17 +60,18 @@ angular.module('stockMachineApp').component('datatable', {
                         searchFor: this.searchFor
                     }
                 })
-                .success((data, status, headers, config) => {
-                    this.data = data;
+                .success((response, status, headers, config) => {
+                    this.count = response.count;
+                    this.rows = response.rows;
                     this.state = 'loaded';
                 })
-                .error((data, status, headers, config) => {
-                    this.$log.error(data);
+                .error((response, status, headers, config) => {
+                    this.$log.error(response);
                     this.state = 'error';
                 });
         }
 
-        resetPage() {
+        resetPageIdx() {
             this.searchFor.pageIdx = 0;
         }
 
@@ -73,7 +79,7 @@ angular.module('stockMachineApp').component('datatable', {
         // PUBLIC
 
         doSearch() {
-            this.resetPage();
+            this.resetPageIdx();
             this.doXhr();
         }
 
@@ -86,6 +92,12 @@ angular.module('stockMachineApp').component('datatable', {
             }
 
             this.doSearch();
+        }
+
+        getShowingXofY() {
+            var min = this.searchFor.pageIdx * this.searchFor.limit +1,
+                max = (this.searchFor.pageIdx+1) * this.searchFor.limit;
+            return 'Showing '+min+'-'+max+' of '+this.count;
         }
 
         getSortClass(colName) {

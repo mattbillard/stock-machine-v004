@@ -56,22 +56,6 @@ function parseField(fieldName, fieldVal) {
 
 //disc, >50
 function parseClause(fieldName, clause) {
-    var obj;
-
-    if (!isNaN(parseFloat(clause))) {
-        obj = parseNum(clause);
-
-    } else if (!clause.match(/>=|<=|>|<|!=|<>|==|=/gi)) {
-        obj = parseRegEx(clause);
-
-
-    } else {
-        obj = parseComparison(clause);
-    }
-
-    var result = {};
-    result[fieldName] = obj;
-
     var result = {};
     result[fieldName] =
         (isNaN(parseFloat(clause)) === false) ? parseNum(clause) :
@@ -94,8 +78,11 @@ function parseNum(clause) {
 //e.g. > 1, =2, <= 3, etc
 function parseComparison(clause) {
     var matches = clause.match(/>=|<=|>|<|!=|<>|==|=|[\w\d.,]+/gi);
-    var comparator = t(matches[0]),
-        value = parseFloat(matches[1]) || matches[1];
+    var comparator = t(matches[0]);
+    var value =
+        (matches[1]==='null') ? null :
+        (isNaN(parseFloat(matches[1]))===false) ? parseFloat(matches[1]) :
+        matches[1];
 
     var result = {};
     result[comparator] = value;
