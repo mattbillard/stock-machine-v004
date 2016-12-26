@@ -2,29 +2,37 @@
 <div>
     <h1>Stock Database</h1>
 
-    <select ng-model="$ctrl.searchFor.limit" ng-options="o as o for o in $ctrl.options.limit.options" ng-change="$ctrl.doSearch()"></select>
+    <div class="clearfix" style="min-height:55px; margin-bottom:2em;">
+        <div class="pull-left form-inline">
+            <div class="form-group">
+                <label>Show: </label>
+                <select
+                    class="form-control"
+                    ng-model="$ctrl.searchFor.limit"
+                    ng-options="o as o for o in $ctrl.options.limit.options"
+                    ng-change="$ctrl.doSearch()"
+                ></select>
+            </div>
+        </div>
+        <div class="pull-right text-right" ng-if="$ctrl.data.state==='LOADED'">
+            <ul uib-pagination
+                ng-model="$ctrl.searchFor.pageNum"
+                ng-change="$ctrl.doPaginate()"
 
-    <div ng-if="$ctrl.data.state==='LOADED'">
-        <ul uib-pagination
-            ng-model="$ctrl.searchFor.pageNum"
-            ng-change="$ctrl.doPaginate()"
+                items-per-page="$ctrl.searchFor.limit"
+                total-items="$ctrl.data.count"
+                max-size="$ctrl.options.paginate.maxSize"
 
-            items-per-page="$ctrl.searchFor.limit"
-            total-items="$ctrl.data.count"
-            max-size="$ctrl.options.paginate.maxSize"
-
-            boundary-links="true"
-            first-text="l<"
-            previous-text="<<"
-            next-text=">>"
-            last-text=">l"
-        ></ul>
-        <div>{{$ctrl.data.showingXofY}}</div>
+                boundary-links="true"
+                first-text="l<"
+                previous-text="<<"
+                next-text=">>"
+                last-text=">l"
+                style="margin:0;"
+            ></ul>
+            <div>{{$ctrl.data.showingXofY}}</div>
+        </div>
     </div>
-
-    <br>
-    <br>
-    <br>
 
     <table class="table table-bordered table-striped table-condensed">
         <thead>

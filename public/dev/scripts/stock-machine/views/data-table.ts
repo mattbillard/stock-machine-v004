@@ -107,8 +107,8 @@ angular.module('stockMachineApp').component('datatable', {
 
         getSortClass(colName) {
             var result =
-                this.searchFor.sort['symbol']===1 ? 'fa-caret-up' :
-                this.searchFor.sort['symbol']===-1 ? 'fa-caret-down' :
+                this.searchFor.sort[colName]===1 ? 'fa-caret-up' :
+                this.searchFor.sort[colName]===-1 ? 'fa-caret-down' :
                 '';
             return result;
         }
