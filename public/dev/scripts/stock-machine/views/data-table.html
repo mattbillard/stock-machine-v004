@@ -1,6 +1,13 @@
 
 <div>
-    <h1>DataTable</h1>
+    <h1>Stock Database</h1>
+
+    <select ng-model="$ctrl.searchFor.limit" ng-options="o as o for o in $ctrl.options.limit.options" ng-change="$ctrl.doSearch()"></select>
+    <input type="number" ng-model="$ctrl.searchFor.pageIdx" ng-change="$ctrl.paginate()" min="0" />
+
+    <br>
+    <br>
+    <br>
 
     <table st-table="$ctrl.data" class="table table-bordered table-striped table-condensed">
         <thead>
@@ -18,34 +25,34 @@
             </tr>
             <tr>
                 <th>
-                    <input ng-model="$ctrl.search.symbol" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols.symbol" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                     <th>
-                        <input ng-model="$ctrl.search.name" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                        <input ng-model="$ctrl.searchFor.cols.name" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                     </th>
                 <th>
-                    <input ng-model="$ctrl.search['nums.currentStockPrice']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['nums.currentStockPrice']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search['calcs.percentageDiscount']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['calcs.percentageDiscount']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search['nums.roic.numbers.average']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['nums.roic.numbers.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search['nums.bvps.growths.average']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['nums.bvps.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search['nums.sales.growths.average']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['nums.sales.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search['nums.eps.growths.average']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['nums.eps.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search['nums.cashFlow.growths.average']" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols['nums.cashFlow.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
                 <th>
-                    <input ng-model="$ctrl.search.stockMarket" xng-enter="$ctrl.getStocks()" placeholder="" class="input-sm form-control" type="search"/>
+                    <input ng-model="$ctrl.searchFor.cols.stockMarket" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
                 </th>
             </tr>
         </thead>
@@ -65,9 +72,7 @@
         </tbody>
     </table>
 
-    <div class="alert alert-danger" ng-if="$ctrl.state==='error'">
-        There was an error with the query
-    </div>
+    <div class="well well-danger" ng-if="$ctrl.state==='ERR'"></div>
 
     <!-- Loading -->
     <div ng-if="$ctrl.state==='loading'" class="text-center" style="padding: 100px;">

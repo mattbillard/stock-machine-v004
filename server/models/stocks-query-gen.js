@@ -30,7 +30,6 @@ function parseSearch(searchObj) {
         results['$and'] = arr;
     }
 
-    console.log(JSON.stringify(results, null, '    '));
     return results;
 }
 

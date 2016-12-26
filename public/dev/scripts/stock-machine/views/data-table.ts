@@ -11,7 +11,17 @@ angular.module('stockMachineApp').component('datatable', {
         private $scope: any;
 
         public data: any = [];
-        public search: any = {};
+        public options: any = {
+            limit: {
+                default: 25,
+                options: [25, 50, 100, 250, 500]
+            }
+        };
+        public searchFor: any = {
+            limit: this.options.limit.default,
+            pageIdx: 0,
+            cols: {}
+        };
         public state: string = '';
 
         // PRIVATE
@@ -21,25 +31,27 @@ angular.module('stockMachineApp').component('datatable', {
             this.$scope = $scope;
             this.$log = $log;
 
-            $scope.$watch('$ctrl.search', () => {
+            $scope.$watch('$ctrl.searchFor', () => {
                 this.clearTable();
             }, true);
-            this.getStocks();
+            this.doSearch();
         }
 
         clearTable() {
             this.data = [];
         }
 
-        getStockData(searchQuery: any) {
-            this.$log.log('Searching: ', JSON.stringify(searchQuery, null, '    '));
+        doXhr() {
+            console.clear();
+            this.clearTable();
+            this.$log.log('Searching: ', JSON.stringify(this.searchFor, null, '    '));
 
             this.state = 'loading';
             this.$http({
                     method: 'POST',
                     url: '/api/stocks/search/',
                     data: {
-                        searchQuery: searchQuery
+                        searchFor: this.searchFor
                     }
                 })
                 .success((data, status, headers, config) => {
@@ -47,18 +59,25 @@ angular.module('stockMachineApp').component('datatable', {
                     this.state = 'loaded';
                 })
                 .error((data, status, headers, config) => {
-                    this.$log.error('ERROR : '+data, '\n');
+                    this.$log.error(data);
                     this.state = 'error';
                 });
+        }
+
+        resetPage() {
+            this.searchFor.pageIdx = 0;
         }
 
 
         // PUBLIC
 
-        getStocks() {
-            console.clear();
-            this.clearTable();
-            this.getStockData(this.search);
+        paginate() {
+            this.doXhr();
+        }
+
+        doSearch() {
+            this.resetPage();
+            this.doXhr();
         }
     }
 });
