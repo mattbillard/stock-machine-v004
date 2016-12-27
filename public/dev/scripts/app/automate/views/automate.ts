@@ -2,8 +2,8 @@ declare var angular: any;
 
 //Automation page
 angular.module('stockMachineApp').component('automate', {
-    templateUrl: '/scripts/stock-machine/views/automate.html',
     bindings: {},
+    templateUrl: 'scripts/app/automate/views/automate.html',
     controller: class {
         public NUM_STOCKS_TO_AUTOMATE: number = 500;
 

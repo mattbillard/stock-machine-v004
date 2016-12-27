@@ -2,7 +2,7 @@ declare var angular: any;
 
 //Controller for RecentStocks modal
 angular.module('stockMachineApp').component('recentStockListModal', {
-    templateUrl: '/scripts/stock-machine/modals/recent-stock-list-modal.html',
+    templateUrl: 'scripts/app/analysis/modals/recent-stock-list-modal.html',
     bindings: {
         modalInstance: '<'
     },

@@ -2,8 +2,8 @@ declare var angular: any;
 
 //Analysis page
 angular.module('stockMachineApp').component('analysis', {
-    templateUrl: '/scripts/stock-machine/views/analysis.html',
     bindings: {},
+    templateUrl: 'scripts/app/analysis/views/analysis.html',
     controller: class {
         $uibModal: any;
         StocksServ: any;
