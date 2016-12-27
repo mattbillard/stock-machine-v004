@@ -9,8 +9,7 @@ angular
     .module('stockMachineApp', [
         'ui.bootstrap',
         'ui.router',
-        'ui.sortable',
-        'smart-table'
+        'ui.sortable'
     ])
     .config(function($httpProvider, $stateProvider, $urlRouterProvider) {
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

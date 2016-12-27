@@ -13,7 +13,6 @@ module.exports = function() {
             bowerRoot+'/angular-bootstrap/ui-bootstrap-tpls.min.js',
             bowerRoot+'/angular-ui-router/release/angular-ui-router.min.js',
             bowerRoot+'/angular-ui-sortable/sortable.min.js',
-            bowerRoot+'/angular-smart-table/dist/smart-table.min.js',
             bowerRoot+'/highcharts/highcharts.js',
             bowerRoot+'/lodash/dist/lodash.js'
         ]
