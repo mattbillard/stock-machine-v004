@@ -1,0 +1,32 @@
+<div class="clearfix" style="min-height:55px; margin-bottom:2em;">
+
+    <div class="pull-left form-inline">
+        <div class="form-group">
+            <label>Show: </label>
+            <select
+                class="form-control"
+                ng-model="$ctrl.DtServ.searchFor.limit"
+                ng-options="o as o for o in $ctrl.DtServ.options.limit.options"
+                ng-change="$ctrl.DtServ.doSearch()"
+            ></select>
+        </div>
+    </div>
+    <div class="pull-right text-right" ng-if="$ctrl.DtServ.data.state==='LOADED'">
+        <ul uib-pagination
+            ng-model="$ctrl.DtServ.searchFor.pageNum"
+            ng-change="$ctrl.DtServ.doPaginate()"
+
+            items-per-page="$ctrl.DtServ.searchFor.limit"
+            total-items="$ctrl.DtServ.data.count"
+            max-size="$ctrl.DtServ.options.paginate.maxSize"
+
+            boundary-links="true"
+            first-text="l<"
+            previous-text="<<"
+            next-text=">>"
+            last-text=">l"
+            style="margin:0;"
+        ></ul>
+        <div>{{$ctrl.DtServ.data.showingXofY}}</div>
+    </div>
+</div>

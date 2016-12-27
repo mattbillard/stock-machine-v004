@@ -159,7 +159,8 @@
     - Pagination
     - Errors
     - UI
-
+    - Start converting into directives
+- Modules: regroup Angular app into modules
 
 
 TODO@mattbillard

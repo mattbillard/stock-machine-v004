@@ -2,117 +2,37 @@
 <div>
     <h1>Stock Database</h1>
 
-    <div class="clearfix" style="min-height:55px; margin-bottom:2em;">
-        <div class="pull-left form-inline">
-            <div class="form-group">
-                <label>Show: </label>
-                <select
-                    class="form-control"
-                    ng-model="$ctrl.searchFor.limit"
-                    ng-options="o as o for o in $ctrl.options.limit.options"
-                    ng-change="$ctrl.doSearch()"
-                ></select>
-            </div>
-        </div>
-        <div class="pull-right text-right" ng-if="$ctrl.data.state==='LOADED'">
-            <ul uib-pagination
-                ng-model="$ctrl.searchFor.pageNum"
-                ng-change="$ctrl.doPaginate()"
-
-                items-per-page="$ctrl.searchFor.limit"
-                total-items="$ctrl.data.count"
-                max-size="$ctrl.options.paginate.maxSize"
-
-                boundary-links="true"
-                first-text="l<"
-                previous-text="<<"
-                next-text=">>"
-                last-text=">l"
-                style="margin:0;"
-            ></ul>
-            <div>{{$ctrl.data.showingXofY}}</div>
-        </div>
-    </div>
+    <dt-pagination></dt-pagination>
 
     <table class="table table-bordered table-striped table-condensed">
         <thead>
             <tr>
-                <th ng-click="$ctrl.doSort('symbol')">
-                    <span class="fa {{$ctrl.getSortClass('symbol')}}"></span>
-                    Symbol
-                </th>
-                <th ng-click="$ctrl.doSort('name')">
-                    <span class="fa {{$ctrl.getSortClass('name')}}"></span>
-                    Name
-                </th>
-                <th ng-click="$ctrl.doSort('nums.currentStockPrice')">
-                    <span class="fa {{$ctrl.getSortClass('nums.currentStockPrice')}}"></span>
-                    Current Price
-                </th>
-                <th ng-click="$ctrl.doSort('calcs.percentageDiscount')">
-                    <span class="fa {{$ctrl.getSortClass('calcs.percentageDiscount')}}"></span>
-                    Percentage Discount
-                </th>
-                <th ng-click="$ctrl.doSort('nums.roic.numbers.average')">
-                    <span class="fa {{$ctrl.getSortClass('nums.roic.numbers.average')}}"></span>
-                    ROIC
-                </th>
-                <th ng-click="$ctrl.doSort('nums.bvps.growths.average')">
-                    <span class="fa {{$ctrl.getSortClass('nums.bvps.growths.average')}}"></span>
-                    BVPS
-                </th>
-                <th ng-click="$ctrl.doSort('nums.sales.growths.average')">
-                    <span class="fa {{$ctrl.getSortClass('nums.sales.growths.average')}}"></span>
-                    Sales
-                </th>
-                <th ng-click="$ctrl.doSort('nums.eps.growths.average')">
-                    <span class="fa {{$ctrl.getSortClass('nums.eps.growths.average')}}"></span>
-                    EPS
-                </th>
-                <th ng-click="$ctrl.doSort('nums.cashFlow.growths.average')">
-                    <span class="fa {{$ctrl.getSortClass('nums.cashFlow.growths.average')}}"></span>
-                    Cash Flow
-                </th>
-                <th ng-click="$ctrl.doSort('stockMarket')">
-                    <span class="fa {{$ctrl.getSortClass('stockMarket')}}"></span>
-                    Stock Market
-                </th>
+                <th dt-sort="symbol">Symbol</th>
+                <th dt-sort="name">Name</th>
+                <th dt-sort="nums.currentStockPrice">Current Price</th>
+                <th dt-sort="calcs.percentageDiscount">Percentage Discount</th>
+                <th dt-sort="nums.roic.numbers.average">ROIC</th>
+                <th dt-sort="nums.bvps.growths.average">BVPS</th>
+                <th dt-sort="nums.sales.growths.average">Sales</th>
+                <th dt-sort="nums.eps.growths.average">EPS</th>
+                <th dt-sort="nums.cashFlow.growths.average">Cash Flow</th>
+                <th dt-sort="stockMarket">Stock Market</th>
             </tr>
             <tr>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols.symbol" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                    <th>
-                        <input ng-model="$ctrl.searchFor.cols.name" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                    </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['nums.currentStockPrice']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['calcs.percentageDiscount']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['nums.roic.numbers.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['nums.bvps.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['nums.sales.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['nums.eps.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols['nums.cashFlow.growths.average']" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
-                <th>
-                    <input ng-model="$ctrl.searchFor.cols.stockMarket" xng-enter="$ctrl.doSearch()" placeholder="" class="input-sm form-control" type="search"/>
-                </th>
+                <th dt-filter="symbol"></th>
+                <th dt-filter="name"></th>
+                <th dt-filter="nums.currentStockPrice"></th>
+                <th dt-filter="calcs.percentageDiscount"></th>
+                <th dt-filter="nums.roic.numbers.average"></th>
+                <th dt-filter="nums.bvps.growths.average"></th>
+                <th dt-filter="nums.sales.growths.average"></th>
+                <th dt-filter="nums.eps.growths.average"></th>
+                <th dt-filter="nums.cashFlow.growths.average"></th>
+                <th dt-filter="stockMarket"></th>
             </tr>
         </thead>
-        <tbody ng-if="$ctrl.data.state==='LOADED'">
-            <tr ng-repeat="stockObj in $ctrl.data.rows">
+        <tbody ng-if="$ctrl.DtServ.data.state==='LOADED'">
+            <tr ng-repeat="stockObj in $ctrl.DtServ.data.rows">
                 <td>{{stockObj.symbol}}</td>
                 <td>{{stockObj.name}}</td>
                 <td>{{stockObj.nums.currentStockPrice}}</td>
@@ -128,13 +48,15 @@
     </table>
 
     <!-- error -->
-    <div class="alert alert-danger" ng-if="$ctrl.data.state==='ERROR'">
-        {{$ctrl.data.error}}
+    <div class="alert alert-danger" ng-if="$ctrl.DtServ.data.state==='ERROR'">
+        {{$ctrl.DtServ.data.error}}
     </div>
 
     <!-- loading -->
-    <div ng-if="$ctrl.data.state==='LOADING'" class="text-center" style="padding: 100px;">
+    <div ng-if="$ctrl.DtServ.data.state==='LOADING'" class="text-center" style="padding: 100px;">
         <i class="fa fa-refresh fa-spin fa-lg"></i>
     </div>
+
+    <dt-pagination></dt-pagination>
 
 </div>

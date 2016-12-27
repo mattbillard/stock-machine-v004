@@ -1,10 +1,8 @@
-declare var $: any;
 declare var angular: any;
 
-//DataTable page
-angular.module('stockMachineApp').component('datatable', {
+angular.module('stockMachineApp').component('dtPagination', {
     bindings: {},
-    templateUrl: 'scripts/app/data-table/views/data-table.html',
+    templateUrl: 'scripts/app/data-table/components/dt-pagination.html',
     controller: class {
         public DtServ: any;
 
