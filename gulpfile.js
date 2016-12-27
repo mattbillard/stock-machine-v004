@@ -1,37 +1,31 @@
 
-var $ = require('gulp-load-plugins')(),
-    autoprefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat'),
-    config = require('./gulp.config.js')(),
-    del = require('del'),
-    gulp = require('gulp'),
-    inject = require('gulp-inject'),
-    less = require('gulp-less'),
-    minify = require('gulp-minify-css'),
-    naturalSort = require('gulp-natural-sort'),
-    ngAnnotate = require('gulp-ng-annotate'),
-    rename = require('gulp-rename'),
-    sourcemaps = require('gulp-sourcemaps'),
-    ts = require('gulp-typescript'),
-    tsconfig = require('./tsconfig.json'),
-    uglify = require('gulp-uglify');
+var config = require('./gulp.config.js')(),
+    gulp = require('gulp');
 
 
 //-------------------- dev --------------------
 
 gulp.task('clean:dev', function() {
+    var del = require('del');
     return del(config.dev.clean);
 });
 
 gulp.task('compile:ts', function() {
-    var obj = config.dev.compile.ts;
+    var ngAnnotate = require('gulp-ng-annotate'),
+        ts = require('gulp-typescript'),
+        tsconfig = require('./tsconfig.json'),
+        obj = config.dev.compile.ts;
     return gulp.src(obj.src)
         .pipe(ts(tsconfig.compilerOptions))
         .pipe(ngAnnotate())
         .pipe(gulp.dest(obj.dest))
 });
 gulp.task('compile:less', function(){
-    var obj = config.dev.compile.less;
+    var autoprefixer = require('gulp-autoprefixer'),
+        concat = require('gulp-concat'),
+        less = require('gulp-less'),
+        obj = config.dev.compile.less;
+
     return gulp.src(obj.src)
         .pipe(concat(obj.fileName))
         .pipe(less())
@@ -43,7 +37,10 @@ gulp.task('compile:less', function(){
 });
 
 gulp.task('inject:dev', function () {
-    var obj = config.dev.inject;
+    var inject = require('gulp-inject'),
+        naturalSort = require('gulp-natural-sort'),
+        rename = require('gulp-rename')
+        obj = config.dev.inject;
     return gulp.src(obj.target)
         .pipe(inject(
             gulp.src(obj.src, {read: false}),
@@ -61,6 +58,7 @@ gulp.task('inject:dev', function () {
 //-------------------- prod --------------------
 
 gulp.task('clean:prod', function() {
+    var del = require('del');
     return del(config.prod.clean);
 });
 
@@ -76,7 +74,10 @@ gulp.task('copy:html', function() {
 });
 
 gulp.task('css', function() {
-    var obj = config.prod.css;
+    var concat = require('gulp-concat'),
+        minify = require('gulp-minify-css'),
+        rename = require('gulp-rename')
+        obj = config.prod.css;
     return gulp.src(obj.src)
         .pipe(concat(obj.fileName))
         .pipe(gulp.dest(obj.dest))
@@ -85,7 +86,10 @@ gulp.task('css', function() {
         .pipe(gulp.dest(obj.dest));
 });
 gulp.task('js', function() {
-    var obj = config.prod.js;
+    var concat = require('gulp-concat'),
+        rename = require('gulp-rename')
+        uglify = require('gulp-uglify'),
+        obj = config.prod.js;
     return gulp.src(obj.src)
         .pipe(concat(obj.fileName))
         .pipe(gulp.dest(obj.dest))
@@ -95,7 +99,10 @@ gulp.task('js', function() {
 });
 
 gulp.task('inject:prod', function () {
-    var obj = config.prod.inject;
+    var inject = require('gulp-inject'),
+        naturalSort = require('gulp-natural-sort'),
+        rename = require('gulp-rename')
+        obj = config.prod.inject;
     return gulp.src(obj.target)
         .pipe(inject(
             gulp.src(obj.src, {read: false}),
@@ -125,6 +132,7 @@ gulp.task('watch:ts', function() {
 //Use the tasks below this line
 
 gulp.task('dev', function() {
+    var $ = require('gulp-load-plugins')();
     $.runSequence(
         'clean:dev',
         [
@@ -136,6 +144,7 @@ gulp.task('dev', function() {
 });
 
 gulp.task('prod', function() {
+    var $ = require('gulp-load-plugins')();
     $.runSequence(
         'clean:prod',
         [

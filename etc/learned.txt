@@ -4,6 +4,9 @@ LEARNED / SELF-REMINDERS
 ANGULAR
 - Enable Express to distinguish between normal and XHR reqs by putting the following in app.config $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+GULP
+- Require()s at the top slow down the initialization of gulp considerably. Move them into the tasks that you need them.
+
 NODE/EXPRESS
 - Errors
     - Node/Express have gotten a lot better at handling errors without crashing the whole server. Just make sure your error handler logs it.
