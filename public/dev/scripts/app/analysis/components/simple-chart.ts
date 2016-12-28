@@ -27,7 +27,7 @@ angular.module('stockMachineApp').component('simpleChart', {
 
         // PUBLIC
 
-        convert(data) {
+        public convert(data) {
             let result = [];
             angular.forEach(data, (val, key) => {
                 let num = val*1;
@@ -37,7 +37,7 @@ angular.module('stockMachineApp').component('simpleChart', {
             return result;
         }
 
-        draw(data) {
+        public draw(data) {
             this.$element.find('.chart').highcharts({
                 title: {
                     text: '',

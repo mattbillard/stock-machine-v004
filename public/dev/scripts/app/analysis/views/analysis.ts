@@ -5,9 +5,10 @@ angular.module('stockMachineApp').component('analysis', {
     bindings: {},
     templateUrl: 'scripts/app/analysis/views/analysis.html',
     controller: class {
-        $uibModal: any;
-        StocksServ: any;
-        externalUrls: any = {
+        private $uibModal: any;
+
+        public StocksServ: any;
+        public externalUrls: any = {
             'yahooCharts': function(symbol) {
                 return 'http://finance.yahoo.com/echarts?s='+ symbol;
             },
@@ -27,7 +28,7 @@ angular.module('stockMachineApp').component('analysis', {
 
         // PUBLIC
 
-        openExternalUrl(command) {
+        public openExternalUrl(command) {
             let url;
             let symbol = this.StocksServ.currStock.symbol;
 
@@ -43,7 +44,7 @@ angular.module('stockMachineApp').component('analysis', {
             }
         }
 
-        openRecentStockListModal() {
+        public openRecentStockListModal() {
             this.$uibModal.open({
                 animation: true,
                 component: 'recentStockListModal',

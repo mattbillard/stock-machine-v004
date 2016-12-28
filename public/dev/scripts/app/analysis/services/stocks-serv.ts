@@ -30,13 +30,13 @@ angular.module('stockMachineApp').service('StocksServ', class {
         });
     }
 
-    addToStockList(stockObj) {
+    private addToStockList(stockObj) {
         let symbol = stockObj.symbol;
         this.stockList.unshift(stockObj);
         this.$log.log(symbol+' added to recent stocks');
     }
 
-    analyzeOneStock(symbol) {
+    private analyzeOneStock(symbol) {
         this.$log.log('\nAnalyzing '+symbol);
 
         this.$http.get('api/stocks/from-database/'+symbol)
@@ -58,7 +58,7 @@ angular.module('stockMachineApp').service('StocksServ', class {
 
     }
 
-    analyzeStocksArr() {
+    private analyzeStocksArr() {
         this.stocksInput = this.stocksToAnalyze.join(', ');
 
         if (this.stocksToAnalyze.length >= 1) {
@@ -68,14 +68,14 @@ angular.module('stockMachineApp').service('StocksServ', class {
         }
     }
 
-    loadStocksFromLocalStorage() {
+    private loadStocksFromLocalStorage() {
         this.$log.log('Loading stocks form localStorage');
         if (localStorage['recentStocks']) {
             this.stockList = JSON.parse(localStorage['recentStocks']);
         }
     }
 
-    saveStocksToLocalStorage() {
+    private saveStocksToLocalStorage() {
         this.$log.log('Saving stocks to localStorage\n\n');
         localStorage['recentStocks'] = JSON.stringify(angular.copy(this.stockList));
     }
@@ -83,27 +83,27 @@ angular.module('stockMachineApp').service('StocksServ', class {
 
     // PUBLIC
 
-    analyzeStocks() {
+    public analyzeStocks() {
         this.$log.log('Starting stock $ctrl...');
         let stockArr :any = this.stocksInput.toUpperCase().replace(/ /g, '').split(',');
         this.stocksToAnalyze = stockArr.filter((val) => { return val; });
         this.analyzeStocksArr();
     }
 
-    deleteStock(index) {
+    public deleteStock(index) {
         this.stockList.splice(index, 1);
         this.$timeout(() => {
             this.loadFromStockList(index);
         });
     }
 
-    isBadStockMarket(stockMarket) {
+    public isBadStockMarket(stockMarket) {
         if (stockMarket) {
             return ( stockMarket.indexOf('OT') >= 0 );
         }
     }
 
-    loadFromStockList(index) {
+    public loadFromStockList(index) {
         let currStock = this.stockList[index];
         if (currStock) {
             this.currStock = currStock;
@@ -116,7 +116,7 @@ angular.module('stockMachineApp').service('StocksServ', class {
         }
     }
 
-    percentageDiscountCssClass(stockObj) {
+    public percentageDiscountCssClass(stockObj) {
         let cssClass = '';
         if (stockObj && stockObj.calcs) {
             let percentageDiscount = stockObj.calcs.percentageDiscount;
@@ -137,7 +137,7 @@ angular.module('stockMachineApp').service('StocksServ', class {
         return cssClass;
     }
 
-    redoCalcs(field, value) {
+    public redoCalcs(field, value) {
         this.$log.log('(Re)doing calcs');
         let currStock = this.currStock;
 

@@ -5,12 +5,12 @@ angular.module('stockMachineApp').component('automate', {
     bindings: {},
     templateUrl: 'scripts/app/automate/views/automate.html',
     controller: class {
-        public NUM_STOCKS_TO_AUTOMATE: number = 500;
-
         private $http: any;
         private $log: any;
         private automationCount: number = null;
         private automating: boolean = false;
+
+        public NUM_STOCKS_TO_AUTOMATE: number = 500;
 
 
         // PRIVATE
@@ -20,7 +20,7 @@ angular.module('stockMachineApp').component('automate', {
             this.$log = $log;
         }
 
-        automateNextStock() {
+        private automateNextStock() {
             this.automationCount++;
             this.$log.log(this.automationCount + ': Automating stock');
 
@@ -53,7 +53,7 @@ angular.module('stockMachineApp').component('automate', {
 
         // PUBLIC
 
-        automationStart() {
+        public automationStart() {
             if (this.automationCount === null || this.automationCount >= this.NUM_STOCKS_TO_AUTOMATE) {
                 this.$log.log('\nAutomating (' + this.NUM_STOCKS_TO_AUTOMATE + ') stocks...');
                 this.automationCount = 0;
@@ -64,16 +64,16 @@ angular.module('stockMachineApp').component('automate', {
             this.automateNextStock();
         }
 
-        automationStop() {
+        public automationStop() {
             this.automating = false;
             this.$log.log('Automation stopped');
         }
 
-        getAutomationCount() {
+        public getAutomationCount() {
             return this.automationCount;
         }
 
-        getAutomationPercent() {
+        public getAutomationPercent() {
             let percent;
             let count = this.automationCount;
             if (count === null) {
@@ -86,7 +86,7 @@ angular.module('stockMachineApp').component('automate', {
             return percent;
         }
 
-        isAutomating() {
+        public isAutomating() {
             return this.automating;
         }
     }

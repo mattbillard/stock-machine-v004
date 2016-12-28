@@ -15,7 +15,7 @@ angular.module('stockMachineApp').component('stockInputCalc', {
             this.StocksServ = StocksServ;
         }
 
-        redoCalcs(key, $event) {
+        public redoCalcs(key, $event) {
             this.StocksServ.redoCalcs(key, $event.target.value);
         }
     }

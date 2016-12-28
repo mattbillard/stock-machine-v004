@@ -21,11 +21,11 @@ angular.module('stockMachineApp').component('recentStockListModal', {
 
         // PUBLIC
 
-        modalOk() {
+        public modalOk() {
             this.modalInstance.close();
         }
 
-        modalCancel() {
+        public modalCancel() {
             this.modalInstance.dismiss('cancel');
         }
     }

@@ -17,3 +17,6 @@ NODE/EXPRESS
 MONGODB / MONGOOSE
 - Count: to get the count, you need to do queries
 - Mongoose doesn't care what order you do .sort().limit().skip()
+
+TYPESCRIPT
+- IntelliJ uses an outdated version of TypeScript. Update TypeScript with "npm update typescript -g". Then in the settings, point the "Compiler Version" to /usr/local/lib/node_modules/typescript/lib

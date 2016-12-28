@@ -43,7 +43,7 @@ angular.module('stockMachineApp').service('DtServ', class {
         this.doSearch();
     }
 
-    clearData() {
+    private clearData() {
         this.data.count = 0;
         this.data.rows = [];
         this.data.error = '';
@@ -51,7 +51,7 @@ angular.module('stockMachineApp').service('DtServ', class {
         this.data.state = 'CLEARED';
     }
 
-    doXhr() {
+    private doXhr() {
         this.$log.log('Searching: ', JSON.stringify(this.searchFor, null, '    '));
         this.data.state = 'LOADING';
 
@@ -75,7 +75,7 @@ angular.module('stockMachineApp').service('DtServ', class {
             });
     }
 
-    resetPageIdx() {
+    private resetPageIdx() {
         this.searchFor.pageNum = 1;
     }
 

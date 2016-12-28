@@ -6,7 +6,7 @@ angular.module('stockMachineApp').service('UtilsServ', class UtilsServ {
     public NAN: string = 'NaN';
 
     //Return average of all numeric items in an array
-    avg(arr) {
+    public avg(arr) {
         //If is an object, not an array
         if (angular.isObject(arr)) {
             arr = _.values(arr);
@@ -26,12 +26,12 @@ angular.module('stockMachineApp').service('UtilsServ', class UtilsServ {
     }
 
     //Checks if is a number
-    isNum(val) {
+    public isNum(val) {
         return $.isNumeric(val);
     }
 
     //Convert value(s) to a number(s). Non-numbers will remain unchanged
-    toNum(mixed) {
+    public toNum(mixed) {
         let self = this;
 
         //If mixed is an array or object, use recursion
@@ -74,7 +74,7 @@ angular.module('stockMachineApp').service('UtilsServ', class UtilsServ {
     }
 
     //Round to 2 decimal places
-    round(num) {
+    public round(num) {
         num = this.toNum(num);
 
         if (this.isNum(num)) {

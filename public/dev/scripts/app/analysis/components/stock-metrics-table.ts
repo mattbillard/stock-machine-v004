@@ -26,7 +26,7 @@ angular.module('stockMachineApp').component('stockMetricsTable', {
             });
         }
 
-        makeAverages(currStockNums) {
+        public makeAverages(currStockNums) {
             let averages = {
                 roic: currStockNums.roic.numbers.average,
                 bvps: currStockNums.bvps.growths.average,
@@ -37,7 +37,7 @@ angular.module('stockMachineApp').component('stockMetricsTable', {
             return averages;
         }
 
-        makeTableData(currStockNums) {
+        public makeTableData(currStockNums) {
             let yearData = {};
             let metricKeys = [
                 //'roic',
@@ -79,7 +79,7 @@ angular.module('stockMachineApp').component('stockMetricsTable', {
 
             //Now turn data into an array, sorted by newest to oldest years
             let tableData = [];
-            angular.forEach(yearData, (yearObj, year) => {
+            angular.forEach(yearData, (yearObj:any, year:any) => {
                 yearObj.year = year;
                 tableData.unshift(yearObj);
             });

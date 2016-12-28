@@ -5,6 +5,7 @@ Stock Machine hobby project built with the MEAN stack
 ````
 npm install bower -g
 npm install nodemon -g
+npm install typescript -g
 
 npm install
 bower install
