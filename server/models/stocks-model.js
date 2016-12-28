@@ -54,10 +54,10 @@ function search(searchFor, callback) {
         skip = ((searchFor.pageNum - 1) * limit) || 0,
         sort = searchFor.sort || null;
 
-    console.log(JSON.stringify(mongoDbQuery, null, '    '));
-    console.log('sort: ', sort);
-    console.log('skip: ', skip);
-    console.log('limit: ', limit);
+    //console.log(JSON.stringify(mongoDbQuery, null, '    '));
+    //console.log('sort: ', sort);
+    //console.log('skip: ', skip);
+    //console.log('limit: ', limit);
 
     var query = Stock.find(mongoDbQuery);
     query.count(function(err, count) {

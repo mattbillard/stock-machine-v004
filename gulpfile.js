@@ -10,6 +10,21 @@ gulp.task('clean:dev', function() {
     return del(config.dev.clean);
 });
 
+
+gulp.task('compile:less', function(){
+    var autoprefixer = require('gulp-autoprefixer'),
+        concat = require('gulp-concat'),
+        less = require('gulp-less'),
+        obj = config.dev.compile.less;
+    return gulp.src(obj.src)
+        .pipe(concat(obj.fileName))
+        .pipe(less())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(gulp.dest(obj.dest))
+});
 gulp.task('compile:ts', function() {
     var ngAnnotate = require('gulp-ng-annotate'),
         ts = require('gulp-typescript'),
@@ -20,26 +35,11 @@ gulp.task('compile:ts', function() {
         .pipe(ngAnnotate())
         .pipe(gulp.dest(obj.dest))
 });
-gulp.task('compile:less', function(){
-    var autoprefixer = require('gulp-autoprefixer'),
-        concat = require('gulp-concat'),
-        less = require('gulp-less'),
-        obj = config.dev.compile.less;
-
-    return gulp.src(obj.src)
-        .pipe(concat(obj.fileName))
-        .pipe(less())
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(gulp.dest(obj.dest))
-});
 
 gulp.task('inject:dev', function () {
     var inject = require('gulp-inject'),
         naturalSort = require('gulp-natural-sort'),
-        rename = require('gulp-rename')
+        rename = require('gulp-rename'),
         obj = config.dev.inject;
     return gulp.src(obj.target)
         .pipe(inject(
@@ -76,7 +76,7 @@ gulp.task('copy:html', function() {
 gulp.task('css', function() {
     var concat = require('gulp-concat'),
         minify = require('gulp-minify-css'),
-        rename = require('gulp-rename')
+        rename = require('gulp-rename'),
         obj = config.prod.css;
     return gulp.src(obj.src)
         .pipe(concat(obj.fileName))
@@ -87,7 +87,7 @@ gulp.task('css', function() {
 });
 gulp.task('js', function() {
     var concat = require('gulp-concat'),
-        rename = require('gulp-rename')
+        rename = require('gulp-rename'),
         uglify = require('gulp-uglify'),
         obj = config.prod.js;
     return gulp.src(obj.src)
@@ -101,7 +101,7 @@ gulp.task('js', function() {
 gulp.task('inject:prod', function () {
     var inject = require('gulp-inject'),
         naturalSort = require('gulp-natural-sort'),
-        rename = require('gulp-rename')
+        rename = require('gulp-rename'),
         obj = config.prod.inject;
     return gulp.src(obj.target)
         .pipe(inject(

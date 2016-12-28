@@ -88,7 +88,6 @@ angular.module('stockMachineApp').service('DtServ', class {
     }
 
     public doSearch() {
-        console.log('---doSearch');
         this.resetPageIdx();
         this.clearData();
         this.doXhr();
