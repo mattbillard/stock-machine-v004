@@ -37,7 +37,6 @@ module.exports = function() {
         stylesDir:      devRoot+'/styles',
         cssFiles:      [devRoot+'/styles/**/*.css'],
         lessFiles:     [devRoot+'/styles/**/*.less'],
-        cssFileName:    'styles.css',
         //--------------------
         scriptsDir:     devRoot+'/scripts',
         jsFiles:       [devRoot+'/scripts/**/*.js'],
@@ -77,8 +76,7 @@ module.exports = function() {
             compile: {
                 less: {
                     src: dev.lessFiles,
-                    dest: dev.stylesDir,
-                    fileName: dev.cssFileName
+                    dest: dev.stylesDir
                 },
                 ts: {
                     src: dev.tsFiles,

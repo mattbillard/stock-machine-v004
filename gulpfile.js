@@ -17,7 +17,6 @@ gulp.task('compile:less', function(){
         less = require('gulp-less'),
         obj = config.dev.compile.less;
     return gulp.src(obj.src)
-        .pipe(concat(obj.fileName))
         .pipe(less())
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],

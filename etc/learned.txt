@@ -7,6 +7,13 @@ ANGULAR
 GULP
 - Require()s at the top slow down the initialization of gulp considerably. Move them into the tasks that you need them.
 
+LESS
+- There are 3 options for LESS->CSS:
+    1) Express's less-middleware (which will compile files when the browser requests them)
+    2) IntelliJ's less file watcher
+    3) gulp watch (I have a task to watch this. Needs to be run manually.)
+    - #1 seems to compile more often than needed, and #2 requires is dependent on a specific IDE, so I'm going to stick with #3. (Besides I'm watching for TS->JS anyway)
+
 NODE/EXPRESS
 - Errors
     - Node/Express have gotten a lot better at handling errors without crashing the whole server. Just make sure your error handler logs it.

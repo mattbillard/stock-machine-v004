@@ -19,7 +19,7 @@ module.exports = function (app, config) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser());
-    //app.use(require('less-middleware')(path.join(config.rootPath, 'public')));
+    //app.use(require('less-middleware')(path.join(config.rootPath, 'public', config.env), {debug:true}));
     app.use(express.static(path.join(config.rootPath, 'public', config.env)));
     //app.use(session({secret: 'super secret', resave: false, saveUninitialized: false}));
     //app.use(passport.initialize());
