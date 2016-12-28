@@ -12,7 +12,10 @@ LESS
     1) Express's less-middleware (which will compile files when the browser requests them)
     2) IntelliJ's less file watcher
     3) gulp watch (I have a task to watch this. Needs to be run manually.)
-    - #1 seems to compile more often than needed, and #2 requires is dependent on a specific IDE, so I'm going to stick with #3. (Besides I'm watching for TS->JS anyway)
+    - #1 seems to compile more often than needed
+    - #2 is dependent on a specific IDE
+    - #3 is the only one that does the additional autoprefix task specified in gulpfile
+    - So I'm going to stick with #3. (Besides I'm watching for TS->JS anyway)
 
 NODE/EXPRESS
 - Errors
@@ -27,3 +30,11 @@ MONGODB / MONGOOSE
 
 TYPESCRIPT
 - IntelliJ uses an outdated version of TypeScript. Update TypeScript with "npm update typescript -g". Then in the settings, point the "Compiler Version" to /usr/local/lib/node_modules/typescript/lib
+- There are 3 options for TS->JS:
+    1) npm run tsc (Specified in package.json. Needs to be run manually.)
+    2) IntelliJ's TypeScript file watcher
+    3) gulp watch (I have a task to watch this. Needs to be run manually.)
+    - #1 is super fast to bootup
+    - #2 is dependent on a specific IDE
+    - #3 is the only one that does the additional ngAnnotate task specified in gulpfile
+    - So I'm going to stick with #3. (Besides I'm watching for LESS->CSS anyway)

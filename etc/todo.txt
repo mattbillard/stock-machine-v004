@@ -162,20 +162,27 @@
     - Start converting into directives
 - Modules: regroup Angular app into modules
 
+2016-12-28
+- Misc
+    - Try less-middleware
 
 TODO@mattbillard
 
 - MEAN stack
-    - Routes
-    - Controllers
-    - Models
-    - See todo2.txt
+    - Implement meanjs.org
 - Later
     - Testing
     - Angular 2
     - Redo calcs
     - Login
+    - Redo design
+    - MERN
     - Switch back to getting fresh data rather than pulling stock from DB
-- Redo design
+- Other techs
+    - React
+    - Heroku
+    - Docker
+    - Travis
+    - RxJS
 
 

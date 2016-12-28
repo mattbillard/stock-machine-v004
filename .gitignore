@@ -8,6 +8,7 @@ public/dev/scripts/app/**/*.js.map
 public/dev/styles/*.css
 public/prod/
 temp/
+*.log
 
 
 
